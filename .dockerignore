@@ -91,7 +91,6 @@ ipython_config.py
 .python-version
 
 # poetry
-poetry.lock
 .pyproject.toml
 __pypackages__/
 
@@ -136,3 +135,11 @@ venv.bak/
 # Exclude the Dockerfile and .dockerignore to prevent potential leaks
 Dockerfile
 .dockerignore
+# Runtime configuration and credentials must never enter the build context.
+/config.yaml
+/.env*
+/deploy/*.env
+/deploy/config.yaml
+/voice_samples/
+/pretrained_models/
+/tests/

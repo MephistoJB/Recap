@@ -1,42 +1,42 @@
-FROM python:3.11-slim as base
+FROM python:3.11-slim-bookworm AS builder
 
-ARG DEBIAN_FRONTEND=noninteractive
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=false
 
-RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    ffmpeg \
-    pkg-config \
-    libcairo2-dev \
-    portaudio19-dev \
-    libsndfile1 \
-    libgomp1 \
-    libjpeg-dev \
-    libpng-dev \
-    cmake && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential cmake git pkg-config portaudio19-dev \
+    libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev \
+    libavutil-dev libswresample-dev libswscale-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir poetry && \
-    poetry --version
-
-ENV PATH="/root/.local/bin:$PATH"
-
+RUN pip install --no-cache-dir poetry==1.8.5
 WORKDIR /app
+COPY pyproject.toml poetry.lock ./
+RUN poetry config virtualenvs.create false \
+    && poetry install --only main --no-root --no-ansi
+COPY owl ./owl
+COPY README.md ./
+RUN poetry install --only-root --no-ansi
 
-COPY . /app
+FROM python:3.11-slim-bookworm AS runtime
 
-RUN poetry config virtualenvs.create false && \
-    poetry install -vvv && \
-    rm -rf /root/.cache/pypoetry /root/.cache/pip
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    OMP_NUM_THREADS=1 \
+    HF_HOME=/data/models/huggingface \
+    TORCH_HOME=/data/models/torch \
+    NLTK_DATA=/data/models/nltk
 
-RUN echo '#!/bin/sh\n\
-if [ -z "$CONFIG_FILE" ]; then\n\
-  poetry run owl serve --host 0.0.0.0\n\
-else\n\
-  poetry run owl serve --host 0.0.0.0 --config "$CONFIG_FILE"\n\
-fi' > /entrypoint.sh && \
-    chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg libportaudio2 libsndfile1 libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /usr/local /usr/local
+WORKDIR /app
+COPY --from=builder /app/owl ./owl
+COPY alembic.ini ./
+COPY alembic ./alembic
+LABEL org.opencontainers.image.source="https://github.com/MephistoJB/Owl"
+EXPOSE 8000
+ENTRYPOINT ["owl"]
+CMD ["serve", "--host", "0.0.0.0", "--config", "/config/config.yaml"]

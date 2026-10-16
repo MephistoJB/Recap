@@ -31,6 +31,7 @@ class AsyncDeepgramTranscriptionService(AbstractAsyncTranscriptionService):
 
         options = PrerecordedOptions(
             model=self._config.model,
+            language=self._config.language,
             smart_format=True,
             utterances=True,
             punctuate=True,

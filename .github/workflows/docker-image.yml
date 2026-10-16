@@ -1,55 +1,81 @@
-name: Docker Images
+name: Owl container release
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - 'v*'
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: owl-image-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Test transcription provider boundaries
+        run: python3 -m unittest discover -s tests/unit -v
+
+  image:
+    needs: test
+    runs-on: ubuntu-24.04-arm
     permissions:
       contents: read
       packages: write
+    env:
+      IMAGE: ghcr.io/mephistojb/owl
     steps:
-      - name: Delete huge unnecessary tools folder
-        run: sudo rm -rf /opt/hostedtoolcache
-        
-      - name: Remove unnecessary files
-        run: |
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-        
-      - name: Check out the repo
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push backend image
-        uses: docker/build-push-action@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
+      - name: Build ARM64 server image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
         with:
           context: .
-          file: ./Dockerfile
-          push: true
-          tags: etown/owl:latest
-          platforms: linux/amd64,linux/arm64
-
-      - name: Build and push web image
-        uses: docker/build-push-action@v2
+          platforms: linux/arm64
+          load: true
+          push: false
+          tags: ${{ env.IMAGE }}:sha-${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/MephistoJB/Owl
+            org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Smoke test the actual image and Python dependency imports
+        run: |
+          docker run --rm "$IMAGE:sha-$GITHUB_SHA" --help
+          docker run --rm --entrypoint python "$IMAGE:sha-$GITHUB_SHA" -c \
+            'from owl.server.main import create_server_app; from owl.core.config import Configuration; import whisperx; print("Server imports OK")'
+      - name: Log in to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4
         with:
-          context: ./clients/web
-          file: ./clients/web/Dockerfile
-          push: true
-          tags: etown/owl-web:latest
-          platforms: linux/amd64,linux/arm64
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish tested image
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker push "$IMAGE:sha-$GITHUB_SHA"
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            version="${GITHUB_REF#refs/tags/}"
+            docker tag "$IMAGE:sha-$GITHUB_SHA" "$IMAGE:$version"
+            docker push "$IMAGE:$version"
+            if [[ "$version" != *-* ]]; then
+              docker tag "$IMAGE:sha-$GITHUB_SHA" "$IMAGE:latest"
+              docker push "$IMAGE:latest"
+            fi
+          fi
+          {
+            echo "### Owl ARM64 image"
+            echo "Image: \`$IMAGE:sha-$GITHUB_SHA\`"
+            echo 'Unit tests and image import smoke tests passed before publication.'
+          } >> "$GITHUB_STEP_SUMMARY"

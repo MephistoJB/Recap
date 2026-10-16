@@ -1,0 +1,51 @@
+# Install as /config/config.yaml. Secrets are supplied through environment variables.
+user:
+  name: John
+  client_token: ""
+llm:
+  model: ollama/qwen3-vl:30b-a3b-instruct-q4_K_M
+  api_base_url: http://host.docker.internal:11434
+  api_key: null
+async_transcription:
+  provider: whisper
+streaming_transcription:
+  provider: whisper
+deepgram:
+  api_key: ""
+  model: nova-2
+  language: de
+async_whisper:
+  host: 127.0.0.1
+  port: 8010
+  hf_token: ""
+  device: cpu
+  compute_type: int8
+  batch_size: 4
+  model: tiny
+  verification_threshold: 0.1
+  verification_model_source: speechbrain/spkrec-ecapa-voxceleb
+  verification_model_savedir: /data/models/speaker-verification
+streaming_whisper:
+  host: 127.0.0.1
+  port: 8009
+  model: small
+  language: de
+  silero_sensitivity: 0.4
+  webrtc_sensitivity: 2
+  post_speech_silence_duration: 0.5
+captures:
+  capture_dir: /data/captures
+vad:
+  vad_model_savedir: /data/models/vad
+database:
+  url: sqlite:////data/owl.sqlite3
+conversation_endpointing:
+  timeout_seconds: 300
+  min_utterances: 2
+notification:
+  apn_team_id: ""
+udp:
+  enabled: false
+  host: 0.0.0.0
+  port: 8001
+bing: null

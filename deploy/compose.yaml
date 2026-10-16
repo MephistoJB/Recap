@@ -1,0 +1,34 @@
+# Imported into the Komodo stack "owl" on Macserver. No source-code mounts.
+services:
+  owl:
+    image: ${OWL_IMAGE:?Set the tested GHCR image tag or digest}
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${OWL_BIND_ADDRESS:-0.0.0.0}:${OWL_PORT:-8012}:8000"
+    environment:
+      OWL_USER_CLIENT_TOKEN: ${OWL_USER_CLIENT_TOKEN:?Set a private client token}
+      OWL_ASYNC_WHISPER_HF_TOKEN: ${OWL_ASYNC_WHISPER_HF_TOKEN:?Set the Hugging Face token}
+      OWL_LLM_API_BASE_URL: ${OWL_LLM_API_BASE_URL:-http://host.docker.internal:11434}
+      OWL_LLM_MODEL: ${OWL_LLM_MODEL:-ollama/qwen3-vl:30b-a3b-instruct-q4_K_M}
+      OMP_NUM_THREADS: "1"
+    volumes:
+      - ${OWL_CONFIG_DIR:?Set the config directory}:/config:ro
+      - owl-data:/data
+    shm_size: 1gb
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import os, urllib.request;
+          r=urllib.request.Request('http://127.0.0.1:8000/',headers={'Authorization':'Bearer '+os.environ['OWL_USER_CLIENT_TOKEN']});
+          urllib.request.urlopen(r,timeout=5);
+          urllib.request.urlopen('http://127.0.0.1:8010/openapi.json',timeout=5)
+      interval: 30s
+      timeout: 15s
+      start_period: 10m
+      retries: 3
+volumes:
+  owl-data:
