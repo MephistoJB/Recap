@@ -38,7 +38,7 @@ WORKDIR /app
 COPY --from=builder /app/owl ./owl
 COPY alembic.ini ./
 COPY alembic ./alembic
-LABEL org.opencontainers.image.source="https://github.com/MephistoJB/Owl"
+LABEL org.opencontainers.image.source="https://github.com/MephistoJB/Recap"
 EXPOSE 8000
 ENTRYPOINT ["owl"]
 CMD ["serve", "--host", "0.0.0.0", "--config", "/config/config.yaml"]

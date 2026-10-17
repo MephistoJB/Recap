@@ -38,7 +38,8 @@ nach CLI-/Server-Import-Smoke-Tests veroeffentlicht. Pull Requests publizieren
 keine Images. GitHub Actions verwendet `GITHUB_TOKEN` mit `packages: write`;
 kein separater Docker-Hub-Schluessel ist erforderlich.
 
-- Jeder erfolgreiche Main-/manuelle Build: `ghcr.io/mephistojb/owl:sha-<commit>`.
+- Neue erfolgreiche Main-/manuelle Builds in Recap: `ghcr.io/mephistojb/recap:sha-<commit>`.
+Der oben dokumentierte historische Owl-Digest und bestehende Komodo-Konfigurationen bleiben unveraendert.
 - Tag `vX.Y.Z`: zusaetzlich `:vX.Y.Z` und `:latest`.
 - Tags mit Bindestrich wie `v0.1.0-rc.1`: Versionstag ohne Aktualisierung von `latest`.
 - Das Image ist `linux/arm64`. Andere Architekturen sind nicht Bestandteil

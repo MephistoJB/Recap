@@ -20,3 +20,17 @@ dieselbe Bibliothek und duerfen nicht gleichzeitig darauf schreiben.
 Der historische Docker-Release behaelt seinen Tag und Image-Digest. Neue
 Container-Releases verwenden `ghcr.io/mephistojb/recap`; bestehende Komodo-
 Deployments werden durch das Rebranding nicht umgestellt.
+
+## Pruefung und Repository-Uebertragung
+
+Der Recap-Build wurde auf macserver gebaut, ad hoc signiert und mit codesign
+verifiziert. Alle acht Swift-Tests bestanden. Das ZIP wurde auf Integritaet
+und enthaltenen Herkunftshinweis geprueft.
+
+GitHub blockiert derzeit den Import der historischen Owl-Commits durch Push
+Protection: Hugging-Face-Tokens in alten Versionen von
+`docs/server_configuration.md`. Recap wurde als eigenstaendiges Repository
+angelegt; der alte Fork bleibt bis zur freigegebenen Loesung und verifizierten
+Uebertragung erhalten. Ein Git-Bundle und die Release-Metadaten wurden vorab
+ausserhalb des Repositorys gesichert. Actions-Ausfuehrungen sind nicht als
+Git-Historie uebertragbar; alte Lauf-Links gehoeren zum historischen Fork.

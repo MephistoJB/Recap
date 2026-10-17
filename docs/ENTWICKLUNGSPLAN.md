@@ -229,7 +229,7 @@ den heutigen Agenten-/Memory-Bestand abgleichen.
 ## Arbeitskopie und Git Remotes
 
 - Arbeitskopie: `/root/Documents/Programmierung/Owl`
-- Fork und `origin`: https://github.com/MephistoJB/Owl
+- Eigenstaendiges Zielrepository seit Rebranding: https://github.com/MephistoJB/Recap (Uebertragung der Historie noch in Klaerung).
 - Original und `upstream`: https://github.com/OwlAIProject/Owl
 - Ausgangscommit: `91922655c3cbf0e5f3282c22806b5ac0cf30063e`
 - Plan aus dem Nexus-Projekt verschoben am 2026-10-16.
