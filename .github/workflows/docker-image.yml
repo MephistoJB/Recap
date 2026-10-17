@@ -1,4 +1,4 @@
-name: Owl container release
+name: Recap container release
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: owl-image-${{ github.ref }}
+  group: recap-image-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
       contents: read
       packages: write
     env:
-      IMAGE: ghcr.io/mephistojb/owl
+      IMAGE: ghcr.io/mephistojb/recap
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Set up Buildx
@@ -43,7 +43,7 @@ jobs:
           push: false
           tags: ${{ env.IMAGE }}:sha-${{ github.sha }}
           labels: |
-            org.opencontainers.image.source=https://github.com/MephistoJB/Owl
+            org.opencontainers.image.source=https://github.com/MephistoJB/Recap
             org.opencontainers.image.revision=${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -81,7 +81,7 @@ jobs:
             fi
           fi
           {
-            echo "### Owl ARM64 image"
+            echo "### Recap ARM64 image"
             echo "Image: \`$IMAGE:sha-$GITHUB_SHA\`"
             echo 'Unit tests and image import smoke tests passed before publication.'
           } >> "$GITHUB_STEP_SUMMARY"

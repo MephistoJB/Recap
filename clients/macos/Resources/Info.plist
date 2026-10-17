@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-    <key>CFBundleName</key><string>Owl</string>
-    <key>CFBundleDisplayName</key><string>Owl</string>
+    <key>CFBundleName</key><string>Recap</string>
+    <key>CFBundleDisplayName</key><string>Recap</string>
     <key>CFBundleIdentifier</key><string>org.owl.local.mac</string>
     <key>CFBundleExecutable</key><string>OwlMac</string>
     <key>CFBundleIconFile</key><string>Owl.icns</string>
@@ -11,7 +11,7 @@
     <key>CFBundleVersion</key><string>1</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>NSHighResolutionCapable</key><true/>
-    <key>NSMicrophoneUsageDescription</key><string>Owl nimmt auf deinen Wunsch Gespräche auf und transkribiert sie lokal auf deinem Mac.</string>
-    <key>NSLocalNetworkUsageDescription</key><string>Owl empfängt deine Aufnahmen von iPhone und Apple Watch und verbindet sich mit deinem lokalen Ollama.</string>
+    <key>NSMicrophoneUsageDescription</key><string>Recap nimmt auf deinen Wunsch Gespräche auf und transkribiert sie lokal auf deinem Mac.</string>
+    <key>NSLocalNetworkUsageDescription</key><string>Recap empfängt deine Aufnahmen von iPhone und Apple Watch und verbindet sich mit deinem lokalen Ollama.</string>
     <key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict>
 </dict></plist>

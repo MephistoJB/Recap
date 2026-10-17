@@ -22,7 +22,7 @@ import OwlCore
         } catch { startupError = error.localizedDescription }
     }
     var body: some Scene {
-        WindowGroup("Owl") {
+        WindowGroup("Recap") {
             if let model {
                 LibraryView(model: model)
                     .frame(minWidth: 900, minHeight: 580)

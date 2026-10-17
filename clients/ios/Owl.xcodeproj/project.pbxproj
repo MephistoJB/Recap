@@ -897,7 +897,7 @@
 				DEVELOPMENT_TEAM = 7T2874S592;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Owl Watch Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Owl Watch Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recap Watch Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -927,7 +927,7 @@
 				DEVELOPMENT_TEAM = 7T2874S592;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Owl Watch Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Owl Watch Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recap Watch Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1075,7 +1075,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Owl-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Owl;
+				INFOPLIST_KEY_CFBundleDisplayName = Recap;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Needed for capture";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.owl.Owl;
@@ -1108,7 +1108,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Owl-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Owl;
+				INFOPLIST_KEY_CFBundleDisplayName = Recap;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Needed for capture";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.owl.Owl;
@@ -1142,7 +1142,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Owl/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Owl;
+				INFOPLIST_KEY_CFBundleDisplayName = Recap;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Needed for capture";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Needed for capture";
@@ -1181,7 +1181,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Owl/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Owl;
+				INFOPLIST_KEY_CFBundleDisplayName = Recap;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Needed for capture";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Needed for capture";

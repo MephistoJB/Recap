@@ -1,0 +1,10 @@
+Recap
+
+Derived from Owl (https://github.com/OwlAIProject/Owl).
+Owl copyright (c) 2024 Ethan Sutin and Bart Trzynadlowski.
+Original code, clients, protocols and icon are used under the MIT License.
+The original copyright and full license are preserved in LICENSE.
+
+The native macOS implementation and subsequent changes are maintained as Recap.
+Dependency and model licenses remain separate; consult the bundled license files
+and the model provenance documentation before redistributing model weights.

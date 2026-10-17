@@ -72,7 +72,7 @@ public enum UploadServer {
             catch OwlError.missing(let message) { throw HTTPError(.notFound, message: message) }
         }
         let router = Router()
-        router.get("/") { request, _ in try authorize(request); return try json(["service": "Owl Mac", "version": "0.2.0"]) }
+        router.get("/") { request, _ in try authorize(request); return try json(["service": "Recap Mac", "version": "0.2.0"]) }
         router.get("/health") { _, _ in try json(["status": "ok"]) }
         router.post("/capture/upload_chunk") { request, _ in
             let parts = try await form(request)

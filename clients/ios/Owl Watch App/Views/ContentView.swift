@@ -22,7 +22,7 @@ struct ContentView: View {
                     Text(isCapturing ? "Stop" : "Record")
                 }
             }
-            .navigationTitle("Owl")
+            .navigationTitle("Recap")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     NavigationLink {

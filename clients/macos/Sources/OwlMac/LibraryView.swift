@@ -10,7 +10,7 @@ struct LibraryView: View {
                 HStack {
                     Image(systemName: "waveform.circle.fill").font(.largeTitle).foregroundStyle(.tint)
                     VStack(alignment: .leading) {
-                        Text("Owl").font(.title2.bold())
+                        Text("Recap").font(.title2.bold())
                         Text("Deine Gespräche auf dem Mac").font(.caption).foregroundStyle(.secondary)
                     }
                     Spacer()
@@ -59,7 +59,7 @@ struct LibraryView: View {
                 .tint(model.microphoneRecording == nil ? .accentColor : .red)
             }
         }
-        .alert("Owl", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
+        .alert("Recap", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
             Button("OK") { model.error = nil }
         } message: { Text(model.error ?? "") }
         .confirmationDialog("Aufnahme und Transkript dauerhaft löschen?", isPresented: Binding(get: { deletion != nil }, set: { if !$0 { deletion = nil } })) {

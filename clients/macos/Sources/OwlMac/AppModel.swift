@@ -225,7 +225,7 @@ import UniformTypeIdentifiers
     func export(_ item: Recording, json: Bool) {
         guard let transcript = item.transcript else { return }
         let panel = NSSavePanel(); panel.allowedContentTypes = json ? [.json] : [.plainText]
-        panel.nameFieldStringValue = "Owl-\(item.uuid).\(json ? "json" : "txt")"
+        panel.nameFieldStringValue = "Recap-\(item.uuid).\(json ? "json" : "txt")"
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do {
             if json {

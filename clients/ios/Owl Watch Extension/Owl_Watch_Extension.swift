@@ -33,7 +33,7 @@ struct Owl_Watch_ExtensionEntryView : View {
 
     var body: some View {
         VStack {
-            Text("Owl")
+            Text("Recap")
                 .bold()
         }.padding()
     }
@@ -54,7 +54,7 @@ struct Owl_Watch_Extension: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("Owl")
-        .description("Owl")
+        .configurationDisplayName("Recap")
+        .description("Recap")
     }
 }

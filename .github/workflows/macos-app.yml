@@ -1,4 +1,4 @@
-name: Owl native Mac app
+name: Recap native Mac app
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: owl-mac-${{ github.ref }}
+  group: recap-mac-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -31,6 +31,6 @@ jobs:
         run: bash build-app.sh
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: Owl-macOS-development
-          path: clients/macos/artifacts/Owl-macOS-arm64.zip
+          name: Recap-macOS-development
+          path: clients/macos/artifacts/Recap-macOS-arm64.zip
           retention-days: 14

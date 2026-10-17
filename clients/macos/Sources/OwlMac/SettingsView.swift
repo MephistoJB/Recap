@@ -52,7 +52,7 @@ struct SettingsView: View {
                             }.disabled(!tokenLoaded || token.isEmpty)
                         }
                     }
-                    Text("Die App muss geöffnet und der Mac erreichbar sein. Trage die Mac-Adresse und denselben Token im Owl-Client ein. HTTP-Empfang ist für dein vertrauenswürdiges lokales Netz vorgesehen.")
+                    Text("Die App muss geöffnet und der Mac erreichbar sein. Trage die Mac-Adresse und denselben Token im Recap-Client ein. HTTP-Empfang ist für dein vertrauenswürdiges lokales Netz vorgesehen.")
                         .font(.caption).foregroundStyle(.secondary)
                     Text("Beispiel: http://macserver:\(String(port))").font(.caption.monospaced())
                 }
@@ -63,6 +63,9 @@ struct SettingsView: View {
                     TextField("Modellname", text: $ollamaModel)
                     Text("Zusammenfassungen werden nur auf deinen Klick angefordert. Dabei wird das Transkript an diese Adresse gesendet. Ein Ausfall beeinträchtigt das gespeicherte Transkript nicht.")
                         .font(.caption).foregroundStyle(.secondary)
+                }
+                Section("Recap") {
+                    Link("Basiert auf Owl · MIT-Lizenz", destination: URL(string: "https://github.com/OwlAIProject/Owl")!)
                 }
                 Section("Bibliothek") {
                     Text(model.paths.root.path).font(.caption).textSelection(.enabled)

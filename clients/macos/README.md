@@ -1,4 +1,4 @@
-# Owl fuer macOS
+# Recap fuer macOS
 
 Native SwiftUI-App fuer Apple-Silicon-Macs. Audio, Bibliothek, Verarbeitung und
 Upload-Empfang laufen innerhalb der App; Python und Docker sind dafuer nicht
@@ -7,7 +7,7 @@ macOS 27 / M4 Pro / Swift 6.4. Andere OS-/Hardwarestaende sind nicht abgenommen.
 
 ## Benutzen
 
-1. `~/Library/Developer/Owl/Builds/Owl.app` oeffnen oder das erzeugte ZIP auspacken.
+1. `~/Library/Developer/Recap/Builds/Recap.app` oeffnen oder das erzeugte ZIP auspacken.
 2. In den Einstellungen unter **Audio** die lokalen Modelle einrichten.
    Bereits gepruefte Dateien aus dem bisherigen Experiment werden nach
    Hash-Pruefung uebernommen. Fehlende Modelle werden anonym von Hugging Face
@@ -111,14 +111,14 @@ automatisch gewaehlt. Der Export bereitet die spaetere freizugebende Anbindung v
 cd clients/macos
 xcrun swift test -c release
 bash build-app.sh
-open "$HOME/Library/Developer/Owl/Builds/Owl.app"
+open "$HOME/Library/Developer/Recap/Builds/Recap.app"
 ```
 
 Das Build-Skript erstellt das originale Owl-Icon, uebernimmt SwiftPM-Ressourcen
 und Lizenztexte, signiert ad hoc und prueft die Signatur. Paketierung/Signierung
 erfolgt ausserhalb von iCloud Documents. Das gepruefte Bundle liegt unter
-`~/Library/Developer/Owl/Builds/Owl.app`, sein ZIP unter
-`artifacts/Owl-macOS-arm64.zip`. `artifacts/app-path.txt` enthaelt den Bundle-Pfad.
+`~/Library/Developer/Recap/Builds/Recap.app`, sein ZIP unter
+`artifacts/Recap-macOS-arm64.zip`. `artifacts/app-path.txt` enthaelt den Bundle-Pfad.
 Es wird keine Anwendung in `/Applications` ersetzt.
 Der lokale Entwicklungsbuild ist nicht Developer-ID-signiert oder notarisiert.
 Der GitHub-Workflow `macos-app.yml` baut und testet dasselbe Paket und stellt
