@@ -113,6 +113,18 @@ Normale Bibliothek: `~/Library/Application Support/Owl/`.
 Die App ist zunaechst lokal gebaut; der neue GitHub-Workflow wird erst nach
 seinem tatsaechlichen Lauf als CI-verifiziert bezeichnet.
 
+Erster erfolgreicher GitHub-Lauf: [Native Mac app, 39058498168](https://github.com/MephistoJB/Owl/actions/runs/39058498168),
+Code-Stand `229e064`. Tests, App-Build, Signaturpruefung und ZIP-Upload sind dort
+erfolgreich. Die anschliessenden Korrekturen `0886060` wurden auf macserver mit
+acht Tests und erneutem App-Build geprueft; ihr eigener
+[GitHub-Lauf](https://github.com/MephistoJB/Owl/actions/runs/39059068429) zeigt den
+jeweils aktuellen CI-Zustand.
+
+Ausgeliefertes lokales ZIP: `clients/macos/artifacts/Owl-macOS-arm64.zip`,
+10.565.190 Bytes. SHA256:
+`e8a5435e09866263dde0684e5984eab7f5bd378e28b2ea305f727a33f719929f`.
+Das ZIP ist ein lokaler Entwicklungsbuild, kein notarisiertes Vertriebsrelease.
+
 Rueckbau: App beenden, erzeugtes App-Bundle entfernen und neue Bibliothek
 separat sichern/erhalten. Bestehende iPhone-/Watch-Quellen und Python-Daten
 bleiben nutzbar. Keine Fremdsoftware wurde gepatcht und keine bestehende
