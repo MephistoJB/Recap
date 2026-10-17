@@ -27,10 +27,29 @@ Der Recap-Build wurde auf macserver gebaut, ad hoc signiert und mit codesign
 verifiziert. Alle acht Swift-Tests bestanden. Das ZIP wurde auf Integritaet
 und enthaltenen Herkunftshinweis geprueft.
 
-GitHub blockiert derzeit den Import der historischen Owl-Commits durch Push
-Protection: Hugging-Face-Tokens in alten Versionen von
-`docs/server_configuration.md`. Recap wurde als eigenstaendiges Repository
-angelegt; der alte Fork bleibt bis zur freigegebenen Loesung und verifizierten
-Uebertragung erhalten. Ein Git-Bundle und die Release-Metadaten wurden vorab
-ausserhalb des Repositorys gesichert. Actions-Ausfuehrungen sind nicht als
-Git-Historie uebertragbar; alte Lauf-Links gehoeren zum historischen Fork.
+Die Uebertragung ist abgeschlossen. Recap ist unter
+https://github.com/MephistoJB/Recap ein eigenstaendiges Repository (`fork: false`).
+Der bisherige Fork `MephistoJB/Owl` wurde nach verifizierter Uebertragung geloescht;
+das Original `OwlAIProject/Owl` bleibt unveraendert.
+
+Mit ausdruecklicher Freigabe wurden geerbte Hugging-Face-Tokens aus der
+Git-Historie entfernt (zehn Vorkommen im Export). Alle 3.603 erreichbaren
+Git-Objekte wurden auf dieses Tokenmuster geprueft. Die Commit-Anzahlen je Ref,
+Dateipfade, Dateimodi und Inhalte aller Ref-Spitzen wurden mit dem Original
+verglichen; ausschliesslich die Tokenwerte wurden ersetzt. Dadurch aendern sich
+Commit-IDs. Alle sechs Branches, ein Tag und der historische Release wurden auf
+GitHub erneut gelesen und verifiziert. Alte Commit-IDs in historischen Berichten
+bezeichnen den Stand vor der Bereinigung.
+
+Ein Git-Bundle des vorherigen Stands, Release-Metadaten und ein Bericht zur
+SHA-Zuordnung liegen ausserhalb des Repositorys in einem privaten Backupordner.
+Actions-Ausfuehrungen sind nicht als Git-Historie uebertragbar; alte Lauf-Links
+sind durch Loeschung des Forks nicht mehr verfuegbar. Neue Builds stehen im
+[Recap-Mac-Workflow](https://github.com/MephistoJB/Recap/actions/workflows/macos-app.yml).
+Der historische Container und seine Versionen wurden nach der Loeschung erneut
+geprueft und sind unveraendert. Bestehende Komodo-Konfigurationen bleiben erhalten.
+
+`origin` dieser Arbeitskopie und der Mac-Quellkopie zeigt auf Recap. Diese
+Arbeitskopie verwendet die bereinigten Branches und Tags. Die Mac-Quellkopie
+behaelt ihre vorhandenen Arbeitsdateien und alte lokale Git-Historie; vor einem
+spaeteren Push von dort muss sie auf die bereinigte Historie abgeglichen werden.

@@ -129,3 +129,12 @@ Rueckbau: App beenden, erzeugtes App-Bundle entfernen und neue Bibliothek
 separat sichern/erhalten. Bestehende iPhone-/Watch-Quellen und Python-Daten
 bleiben nutzbar. Keine Fremdsoftware wurde gepatcht und keine bestehende
 Infrastruktur dafuer deaktiviert.
+
+## Recap-Rebranding
+
+Das Projekt heisst seit 2026-10-17 Recap. Repository und Workflow liegen unter
+https://github.com/MephistoJB/Recap. Der alte Fork wurde nach bereinigter
+Uebertragung der Historie geloescht; oben verlinkte historische Actions-Laeufe
+sind deshalb nicht mehr verfuegbar. Details: [Rebranding](REBRANDING.md).
+Der Recap-Build und alle acht Swift-Tests wurden auf macserver erfolgreich
+geprueft; Datenpfade und technische Kennungen bleiben erhalten.

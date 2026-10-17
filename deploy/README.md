@@ -2,8 +2,8 @@
 
 ## Verifizierter Stand vom 2026-10-17
 
-- [Vorschau-Release v0.1.0-owl.1](https://github.com/MephistoJB/Owl/releases/tag/v0.1.0-owl.1).
-- [Erfolgreicher Main-Build](https://github.com/MephistoJB/Owl/actions/runs/39022140586)
+- [Vorschau-Release v0.1.0-owl.1](https://github.com/MephistoJB/Recap/releases/tag/v0.1.0-owl.1).
+- Historischer erfolgreicher Main-Build: 39022140586 (alter Fork geloescht)
   fuer Commit `63103110e069ba9f7fb3ee901cbeb147ff3ab5ef`.
 - Getestetes Image: `ghcr.io/mephistojb/owl:sha-63103110e069ba9f7fb3ee901cbeb147ff3ab5ef`.
 - Komodo ist auf den unveraenderlichen Digest
