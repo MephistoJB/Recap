@@ -7,8 +7,8 @@ import unittest
 from unittest.mock import Mock, AsyncMock
 
 ROOT = Path(__file__).resolve().parents[2]
-WHISPER = 'owl/services/stt/asynchronous/async_whisper/async_whisper_transcription_server.py'
-DEEPGRAM = 'owl/services/stt/asynchronous/async_deepgram_transcription_service.py'
+WHISPER = 'recap/services/stt/asynchronous/async_whisper/async_whisper_transcription_server.py'
+DEEPGRAM = 'recap/services/stt/asynchronous/async_deepgram_transcription_service.py'
 
 
 def load_class(path, class_name, namespace):
@@ -25,7 +25,7 @@ class WhisperTests(unittest.IsolatedAsyncioTestCase):
         self.whisperx.load_align_model.side_effect = lambda **kw: (object(), {'language': kw['language_code']})
         self.whisperx.align.return_value = {'segments': []}
         self.whisperx.assign_word_speakers.return_value = {'segments': []}
-        self.logger = logging.getLogger('owl.unit.whisper')
+        self.logger = logging.getLogger('recap.unit.whisper')
         self.speaker = Mock()
         self.config = SimpleNamespace(model='tiny', device='cpu', compute_type='int8', batch_size=1,
                                       verification_model_source='test', verification_model_savedir='test',

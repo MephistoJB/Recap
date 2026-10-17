@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "owl"
+name = "recap"
 version = "0.1.0"
-description = ""
+description = "Recap legacy transcription server, derived from Owl"
 authors = ["Bart Trzynadlowski <bart.trzy@gmail.com>", "Ethan Sutin <ethan@sutin.net>"]
 readme = "README.md"
 
@@ -41,7 +41,7 @@ whisperx = {git = "https://github.com/m-bain/whisperx.git"}
 pytest = "^7.4.4"
 
 [tool.poetry.scripts]
-owl = "owl.core.cli:cli"
+recap = "recap.core.cli:cli"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,4 +1,4 @@
-# Entwicklungsplan fuer Owl und Hindsight
+# Entwicklungsplan fuer Recap und Hindsight
 
 Stand: 2026-10-17
 

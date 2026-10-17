@@ -1,4 +1,4 @@
-# Owl auf macserver mit Komodo
+# Historischer Server-Stand auf macserver mit Komodo
 
 ## Verifizierter Stand vom 2026-10-17
 
@@ -109,3 +109,12 @@ uebernimmt diese pip-Einstellung nicht. Es werden keine Bibliotheken gepatcht.
 Der Export enthaelt wegen der Git-Quellen keine pip-Hashpflicht; Versions- und
 Quellcommit-Pins bleiben erhalten. Dies ist kein Nachweis fuer Bytegleichheit
 mit den inzwischen entfernten LiteLLM-Distributionsdateien.
+
+## Recap-Quellcode
+
+Das Backend-Paket und die CLI heissen jetzt `recap`. Neue Images werden mit
+`ghcr.io/mephistojb/recap` gebaut; Smoke-Checks und Docker-Entrypoint verwenden
+den neuen Namen. `OWL_*`-Konfiguration und Datenpfade bleiben fuer vorhandene
+Komodo-Konfigurationen erhalten. Der oben dokumentierte alte Digest enthaelt
+den damaligen Owl-Code und wird nicht nachtraeglich veraendert. Fuer die native
+Mac-App wird dieses Backend nicht benoetigt.

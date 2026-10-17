@@ -2,7 +2,9 @@ Recap
 
 Derived from Owl (https://github.com/OwlAIProject/Owl).
 Owl copyright (c) 2024 Ethan Sutin and Bart Trzynadlowski.
-Original code, clients, protocols and icon are used under the MIT License.
+Original code, clients and protocols are used under the MIT License.
+Recap uses its own speech-bubble and return-arrow icon; vector sources are
+in design/recap/. Historical Owl imagery retains its original attribution.
 The original copyright and full license are preserved in LICENSE.
 
 The native macOS implementation and subsequent changes are maintained as Recap.

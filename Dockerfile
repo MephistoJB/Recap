@@ -18,7 +18,7 @@ COPY pyproject.toml poetry.lock README.md ./
 RUN poetry check --lock \
     && poetry export --only main --format=requirements.txt --without-hashes --output=/app/requirements.txt \
     && pip install --no-cache-dir --no-deps --requirement /app/requirements.txt
-COPY owl ./owl
+COPY recap ./recap
 RUN poetry install --only-root --no-ansi
 
 FROM python:3.11-slim-bookworm AS runtime
@@ -35,10 +35,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local /usr/local
 WORKDIR /app
-COPY --from=builder /app/owl ./owl
+COPY --from=builder /app/recap ./recap
 COPY alembic.ini ./
 COPY alembic ./alembic
+COPY LICENSE NOTICE /usr/share/doc/recap/
 LABEL org.opencontainers.image.source="https://github.com/MephistoJB/Recap"
 EXPOSE 8000
-ENTRYPOINT ["owl"]
+ENTRYPOINT ["recap"]
 CMD ["serve", "--host", "0.0.0.0", "--config", "/config/config.yaml"]

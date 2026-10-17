@@ -114,7 +114,7 @@ bash build-app.sh
 open "$HOME/Library/Developer/Recap/Builds/Recap.app"
 ```
 
-Das Build-Skript erstellt das originale Owl-Icon, uebernimmt SwiftPM-Ressourcen
+Das Build-Skript erstellt das eigene Recap-Icon, uebernimmt SwiftPM-Ressourcen
 und Lizenztexte, signiert ad hoc und prueft die Signatur. Paketierung/Signierung
 erfolgt ausserhalb von iCloud Documents. Das gepruefte Bundle liegt unter
 `~/Library/Developer/Recap/Builds/Recap.app`, sein ZIP unter
@@ -124,28 +124,28 @@ Der lokale Entwicklungsbuild ist nicht Developer-ID-signiert oder notarisiert.
 Der GitHub-Workflow `macos-app.yml` baut und testet dasselbe Paket und stellt
 ein App-ZIP als Actions-Artefakt bereit; er enthaelt keine Apple-Zertifikate.
 
-`OwlDoctor` ist ein separates Entwicklungswerkzeug, kein erforderlicher
+`RecapDoctor` ist ein separates Entwicklungswerkzeug, kein erforderlicher
 Laufzeitprozess der App:
 
 ```bash
-xcrun swift build -c release --product OwlDoctor
-.build/release/OwlDoctor install "/absoluter/datenordner"
-.build/release/OwlDoctor process "/absoluter/datenordner" "/aufnahme.wav"
-.build/release/OwlDoctor inspect "/absoluter/datenordner"
+xcrun swift build -c release --product RecapDoctor
+.build/release/RecapDoctor install "/absoluter/datenordner"
+.build/release/RecapDoctor process "/absoluter/datenordner" "/aufnahme.wav"
+.build/release/RecapDoctor inspect "/absoluter/datenordner"
 ```
 
 `serve ROOT PORT` stellt die HTTP-Schnittstelle fuer Integrationstests nur auf
-Loopback bereit und liest einen nur im Prozess gesetzten `OWL_API_TOKEN`.
+Loopback bereit und liest einen nur im Prozess gesetzten `RECAP_API_TOKEN`.
 Der Tool-Modus verarbeitet die Warteschlange nicht selbst. Die normale App
-uebernimmt Verarbeitung, Bedienung und Empfang gemeinsam. `OWL_DATA_DIR`
+uebernimmt Verarbeitung, Bedienung und Empfang gemeinsam. `RECAP_DATA_DIR`
 erlaubt fuer App-Pruefungen eine isolierte Bibliothek; normale Starts verwenden
 den Default-Ordner.
 
 ## Herkunft und weitere Abnahme
 
-Owl-Datenfelder, Zustandsnamen, Upload-Vertraege und Icon stammen aus dem
-vorhandenen MIT-lizenzierten Owl-Projekt. Native Implementierung liegt in
-`Sources/OwlCore/` und `Sources/OwlMac/`; bisherige Clients/Backend bleiben erhalten.
+Datenfelder, Zustandsnamen und Upload-Vertraege stammen aus dem
+MIT-lizenzierten [Owl-Projekt](https://github.com/OwlAIProject/Owl). Native Implementierung liegt in
+`Sources/RecapCore/` und `Sources/RecapMac/`; vorhandene Clients und das alte Backend werden unter Recap weitergefuehrt.
 Die SwiftPM-Pakete sind exakt beziehungsweise ueber `Package.resolved` fixiert.
 Modellrevisionen entsprechen der freigegebenen FluidAudio-Pruefung. SwiftPM
 kann das optionale NeMo-Artefakt trotz abgewaehltem Trait herunterladen.

@@ -1,4 +1,6 @@
-# Owl - Always-on Wearable AI
+# Recap – iPhone und Apple Watch
+
+Die Screenshots stammen teils aus dem urspruenglichen Owl-Projekt; aktuelle Projekt-, Target- und Scheme-Namen verwenden Recap.
 
 [<< Home](../README.md)
 
@@ -33,7 +35,7 @@ Step-by-step instructions are provided here for building and installing the iOS 
 
 Upon first cloning the repository, the development team values in the Xcode project will be invalid and must be manually set.
 
-- Open the Xcode project, located at `clients/ios/Owl.xcodeproj`.
+- Open the Xcode project, located at `clients/ios/Recap.xcodeproj`.
 
 - To find the targets, select the project in the left-most file browser pane, then click on each target in the target list. The *Team* field is under *Signing & Capabilities*.
 
@@ -60,7 +62,7 @@ We **strongly** recommend running the server over HTTPS in order to ensure that 
 <i>Exception domains are specified in the same place as development team.</i>
 </p>
 
-- **Note:** Don't forget to do this for the *Owl Watch App* target, too. The process must be performed for both the *Owl* **and** *Owl Watch App* targets!
+- **Note:** Don't forget to do this for the *Recap Watch App* target, too. The process must be performed for both the *Recap* **and** *Recap Watch App* targets!
 
 ### 5. Configure App Constants
 
@@ -75,7 +77,7 @@ The server address and client token (created during [server configuration](serve
 
 #### iPhone App
 
-- Select *Owl* as the current scheme. The scheme is found near the top-center of the Xcode window, as shown below.
+- Select *Recap* as the current scheme. The scheme is found near the top-center of the Xcode window, as shown below.
 
 <p align="center">
 <img alt="Scheme selection" src="../docs/images/xcode/xcode_scheme.png"><br>
@@ -102,11 +104,11 @@ The server address and client token (created during [server configuration](serve
 
 #### Watch App
 
-- Select *Owl Watch App* as the scheme. The rest of the procedure is identical to building and deploying the iPhone app. Note that deployment to Watch is often buggy and slow (this is not unique to Owl).
+- Select *Recap Watch App* as the scheme. The rest of the procedure is identical to building and deploying the iPhone app. Note that deployment to Watch is often buggy and slow (this is not unique to Recap).
 
 #### How to Fix Corrupted Projects After Git Checkout
 
-Sometimes the Xcode project settings, particularly the schemes, become corrupted when checking out a new version of the repository. This usually manifests itself with missing schemes (e.g., *Owl* or *Owl Watch App* may be missing entirely). To fix this problem, close Xcode and issue the following command on the terminal, then open the project again.
+Sometimes the Xcode project settings, particularly the schemes, become corrupted when checking out a new version of the repository. This usually manifests itself with missing schemes (e.g., *Recap* or *Recap Watch App* may be missing entirely). To fix this problem, close Xcode and issue the following command on the terminal, then open the project again.
 
 ```
 rm -rf ~/Library/Developer/Xcode/DerivedData

@@ -2,23 +2,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "OwlMac",
+    name: "RecapMac",
     platforms: [.macOS(.v14)],
-    products: [.executable(name: "OwlMac", targets: ["OwlMac"]),
-               .executable(name: "OwlDoctor", targets: ["OwlDoctor"])],
+    products: [.executable(name: "RecapMac", targets: ["RecapMac"]),
+               .executable(name: "RecapDoctor", targets: ["RecapDoctor"])],
     dependencies: [
         .package(url: "https://github.com/FluidInference/FluidAudio.git", exact: "0.17.7", traits: []),
         .package(url: "https://github.com/hummingbird-project/hummingbird.git", exact: "2.28.0"),
         .package(url: "https://github.com/vapor/multipart-kit.git", exact: "4.7.1")
     ],
     targets: [
-        .target(name: "OwlCore", dependencies: [
+        .target(name: "RecapCore", dependencies: [
             .product(name: "FluidAudio", package: "FluidAudio"),
             .product(name: "Hummingbird", package: "hummingbird"),
             .product(name: "MultipartKit", package: "multipart-kit")
         ]),
-        .executableTarget(name: "OwlMac", dependencies: ["OwlCore"]),
-        .executableTarget(name: "OwlDoctor", dependencies: ["OwlCore"]),
-        .testTarget(name: "OwlCoreTests", dependencies: ["OwlCore"])
+        .executableTarget(name: "RecapMac", dependencies: ["RecapCore"]),
+        .executableTarget(name: "RecapDoctor", dependencies: ["RecapCore"]),
+        .testTarget(name: "RecapCoreTests", dependencies: ["RecapCore"])
     ]
 )

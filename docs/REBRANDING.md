@@ -4,11 +4,10 @@ Seit 2026-10-17 wird das Projekt als Recap eigenstaendig weiterentwickelt.
 Herkunft: https://github.com/OwlAIProject/Owl (MIT; siehe LICENSE und NOTICE).
 
 App-Anzeigenamen auf Mac, iPhone und Watch, Mac-Bundle-Dateiname, Exporte,
-Repository und kuenftige CI-Artefakte verwenden Recap. Das bisherige Owl-Icon
-bleibt vorerst als aus Owl uebernommenes Asset mit Herkunftshinweis erhalten.
+Repository und kuenftige CI-Artefakte verwenden Recap. Das freigegebene Recap-Icon zeigt eine Sprechblase mit Rueckblick-Pfeil
+auf einem petrolfarbenen Verlauf. Editierbare Quellen liegen in `design/recap/`.
 
-Technische Kontinuitaet: Bundle-IDs, Swift-Module/Xcode-Targets, Python-Modul
-`owl`, HTTP-Vertraege, Keychain-Service, UserDefaults-Schluessel, Modellmanifest
+Technische Kontinuitaet: Bundle-IDs, HTTP-Vertraege, Keychain-Service, UserDefaults-Schluessel, Modellmanifest
 und `~/Library/Application Support/Owl/` bleiben erhalten. So benoetigt das
 Rebranding keine Datenmigration und verliert keine bestehenden Einstellungen.
 Der Projektordner kann weiterhin Owl heissen; der Git-Remote zeigt auf Recap.
@@ -53,3 +52,44 @@ geprueft und sind unveraendert. Bestehende Komodo-Konfigurationen bleiben erhalt
 Arbeitskopie verwendet die bereinigten Branches und Tags. Die Mac-Quellkopie
 behaelt ihre vorhandenen Arbeitsdateien und alte lokale Git-Historie; vor einem
 spaeteren Push von dort muss sie auf die bereinigte Historie abgeglichen werden.
+
+## Rebranding im Code und eigenes Icon
+
+Freigegebener Entwurf: A, Sprechblase mit Rueckblick-Pfeil. Der gemeinsame
+Vektor-Master `design/recap/Recap.svg` ergibt ein deckendes 1024-px-Icon fuer
+iOS/watchOS. `Recap-mac.svg` verwendet denselben Entwurf mit abgerundeter
+Kachel und transparentem Rand fuer den Mac. Die PNGs wurden aus SVG mit
+Chromium gerendert und visuell geprueft; keine externe Bildbibliothek ist
+zur Laufzeit erforderlich. Ungewaehlte Entwuerfe bleiben als Entwurfsreferenz.
+
+Native Module/Produkte: `RecapCore`, `RecapMac`, `RecapDoctor`,
+`RecapCoreTests`. Typen: `RecapPaths`, `RecapError`, `RecapMultipart`.
+Das Xcode-Projekt heisst `clients/ios/Recap.xcodeproj`; Targets, Schemes,
+Swift-App-Typen und Tests verwenden Recap. Die drei Apple-App-Iconsets
+enthalten das eigene Recap-Icon.
+
+Die nativen Entwicklungsvariablen heissen jetzt `RECAP_DATA_DIR` und
+`RECAP_API_TOKEN`. Es gibt keine neue Fallback- oder Migrationsschicht.
+
+Auch das alte Python-Backend wird im Quellcode als Paket `recap` und CLI
+`recap` gebaut. Dockerfile, Alembic-Import, CI-Smoke-Checks und Unit-Tests
+zeigen auf dieses Paket. Bestehende Docker-Releases bleiben unveraendert.
+Historische Anleitungen und Experimente dokumentieren weiterhin den damaligen
+Owl-Stand. Die alte Web-Image-Vorlage `docker-compose.yml` ist ebenfalls
+historisch; sie wird fuer die native App nicht verwendet.
+
+Bewusst erhaltene technische Werte: `org.owl.local.mac`, iOS/watchOS-Bundle-IDs
+und deren Verknuepfungen, Widget-Kind, Bluetooth-Restore-ID, `owl.*`-Defaults,
+Keychain-Service, `owl-model-manifest.json`, bisheriger Application-Support-
+Pfad und `OWL_*`-Server-/Komodo-Konfiguration. Ihre Umstellung wuerde eine
+separate Migration benoetigen. Die SwiftData-Modelltypen und Eigenschaften
+bleiben erhalten; die alte Testbibliothek wurde nach dem Modulwechsel erfolgreich geoeffnet.
+Die gespeicherte Aufnahme ist weiterhin als abgeschlossen mit 53 Woertern lesbar.
+
+Abnahme: Mac-App gebaut und Signatur geprueft; acht Swift-Tests und fuenf
+Python-Unit-Tests bestanden. Xcode baute `Recap` einschliesslich Watch-App
+fuer die Simulatoren erfolgreich (ohne Codesign/Provisionierung). Assetkatalog-
+Verweise, Plist-Syntax und die deckenden 1024-px-iPhone-/Watch-Icons sind geprueft.
+
+Geprueftes App-ZIP: `clients/macos/artifacts/Recap-macOS-arm64.zip`
+(11,145,247 Bytes; SHA256 `5dbcb46f3889114d67ce01d81910106950dbb7f132c55ee0d7d4a47e84915c82`).

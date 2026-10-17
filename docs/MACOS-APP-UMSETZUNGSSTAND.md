@@ -138,3 +138,9 @@ Uebertragung der Historie geloescht; oben verlinkte historische Actions-Laeufe
 sind deshalb nicht mehr verfuegbar. Details: [Rebranding](REBRANDING.md).
 Der Recap-Build und alle acht Swift-Tests wurden auf macserver erfolgreich
 geprueft; Datenpfade und technische Kennungen bleiben erhalten.
+
+Das Rebranding im Code ist ebenfalls umgesetzt: `RecapCore`, `RecapMac`,
+`RecapDoctor` und `RecapCoreTests`; neues Icon gemaess freigegebenem Entwurf A.
+Der Mac-Build mit diesen Modulnamen besteht alle acht Swift-Tests und liest die
+bisherige Testbibliothek mit 53 Woertern. Das umbenannte iPhone-/Watch-Projekt
+`clients/ios/Recap.xcodeproj` besteht den kombinierten Simulatorbuild.
