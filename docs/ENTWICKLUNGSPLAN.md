@@ -1,6 +1,6 @@
 # Entwicklungsplan fuer Owl und Hindsight
 
-Stand: 2026-10-16
+Stand: 2026-10-17
 
 Status: Arbeitsplan zur schrittweisen Umsetzung. Die Ablage und das schrittweise Vorgehen sind beauftragt. Architekturentscheidungen und konkrete Patches werden vor ihrer Umsetzung entsprechend den Projektregeln freigegeben.
 
@@ -9,6 +9,19 @@ Status: Arbeitsplan zur schrittweisen Umsetzung. Die Ablage und das schrittweise
 Owl erfasst bewusst gestartete Gespraeche auf der Apple Watch und transkribiert sie. Hindsight ordnet die Gespraeche zeitlich ein, bildet Tagesrueckblicke und gewinnt langfristige, belegbare Erkenntnisse. Der persoenliche Agent macht diese Inhalte abfragbar.
 
 Der erste Release umfasst deutsche Aufnahmen, Offline-Uebertragung, nachvollziehbare Verarbeitung und die verlaessliche Uebergabe abgeschlossener Gespraeche. Ganztaegige automatische Aufnahme folgt erst nach erfolgreicher Abnahme dieses Weges.
+
+Zielbild seit Nutzerentscheidung vom 2026-10-17: Eine vollstaendige native
+Swift-App auf dem Mac uebernimmt Empfang, Speicherung, Verarbeitung und
+Bedienung. Audioumfang ebenfalls freigegeben: deutsches Transkript mit Zeitmarken,
+Sprechertrennung und Erkennung der eigenen Stimme, schrittweise umgesetzt.
+Zunaechst Verarbeitung nach Aufnahmeende, Live-Text spaeter. Engine und konkrete Umsetzung werden einzeln festgelegt;
+siehe [macOS-Entscheidungsvorlage](proposals/MACOS-ENTSCHEIDUNGSPLAN.md).
+
+Inzwischen ist die Umsetzung beauftragt: SwiftData und ein eingebetteter
+Hummingbird-Empfaenger sind freigegeben. Die native App unter `clients/macos/`
+verwendet FluidAudio als erste implementierte Engine. [Umsetzungsstand,
+Pruefungen und Grenzen](MACOS-APP-UMSETZUNGSSTAND.md) sind getrennt von der
+noch offenen Geraete-/Sprecherqualitaetsabnahme dokumentiert.
 
 ## Bestehende Architektur und Abgleich
 
@@ -71,9 +84,17 @@ Unit-Tests geprueft. Dockerisierung und GitHub-Release wurden beauftragt;
 [die freigegebene Build-Korrektur](proposals/DOCKER-BUILD-FREIGABE.md) ist umgesetzt.
 Das ARM64-Image hat den GitHub-Build und die Image-Smoke-Tests bestanden und
 wurde ueber Komodo auf den macserver heruntergeladen. Der Backend-Start und
-die echte Transkriptionspruefung warten auf den HF-Zugang; siehe
+die echte Transkriptionspruefung des vorbereiteten WhisperX-Wegs warten auf den HF-Zugang; siehe
 [Bereitstellungsstand](../deploy/README.md). Danach folgen gesondert
 Verarbeitungsabschluss, Wiederaufnahme und Hindsight-Uebergabe.
+
+Inzwischen werden native macOS-Transkription und eine moegliche vollstaendige
+Mac-App geprueft. Die [Entscheidungsvorlage fuer macOS](proposals/MACOS-ENTSCHEIDUNGSPLAN.md)
+ordnet Zielbild, Funktionsumfang, Engine-Test und anschliessende Umsetzung.
+Das Ziel einer vollstaendigen Swift-App ist inzwischen ausdruecklich gewaehlt;
+Engine und konkrete Umsetzung bleiben offen. HF-Zugang ist eine
+Voraussetzung des vorbereiteten Deployment-Wegs, keine allgemeine Voraussetzung
+fuer jede moegliche Owl-Transkription.
 
 ## Phase 3 Uebergabe entwerfen und implementieren
 
@@ -184,7 +205,26 @@ Zurueckgestellt: ganztaegige automatische Aufnahme, neue Watch-Oberflaechen, aut
 
 ## Naechster Schritt
 
-Serverarbeit unabhaengig von der Watch fortsetzen: HF-Zugang in Psono bereitstellen, als geheime Komodo-Variable einbinden und das bereits getestete Image ueber den vorbereiteten Stack `owl` auf macserver starten. Danach Health, authentifizierte API und deutsche Audioverarbeitung testen. Dockerisierung, GitHub-Release und macserver als Betriebsort sind ausdruecklich freigegeben. Parallel bleiben Signierung, echte Watch und Watch-Version offen. Vor der Hindsight-Uebergabe den heutigen Agenten-/Memory-Bestand abgleichen; weitere Patches beziehungsweise Architekturentscheidungen gesondert freigeben.
+Punkt 1 der [macOS-Entscheidungsvorlage](proposals/MACOS-ENTSCHEIDUNGSPLAN.md)
+und Punkt 2 sind entschieden: vollstaendige native Swift-App mit Text und
+Zeitmarken, Sprechertrennung und Erkennung der eigenen Stimme, schrittweise
+umgesetzt; zunaechst nach Aufnahmeende. Punkt 3: FluidAudio ist als erster
+Pruefkandidat gewaehlt. Die [Quellen- und Kompatibilitaetspruefung](proposals/FLUIDAUDIO-PRUEFUNG.md)
+ist abgeschlossen. Der begrenzte Mac-Test aus Punkt 4 wurde freigegeben und
+technisch ausgefuehrt: [Messwerte und offene Abnahme](FLUIDAUDIO-TESTERGEBNISSE.md).
+Der Nutzer hat danach den Wechsel von der Testphase zur vollstaendigen nativen
+App beauftragt und SwiftData/Hummingbird freigegeben. Der erste native App-Stand
+ist implementiert; siehe [Umsetzungsstand](MACOS-APP-UMSETZUNGSSTAND.md).
+Als Naechstes den durchgaengigen App-Start und anschliessend die Verbindung
+mit signierten Watch-/iPhone-Clients abnehmen. Echte Sprecherqualitaet und
+Nutzeridentifizierung bleiben offen, blockieren den App-Bau aber nicht.
+
+Der bisher freigegebene Docker-/Komodo-Weg bleibt als vorbereitete Option
+erhalten. Bei seiner Fortsetzung HF-Zugang in Psono bereitstellen, ueber eine
+geheime Komodo-Variable einbinden und erst dann das Image starten sowie Health,
+authentifizierte API und deutsche Audioverarbeitung pruefen. Parallel bleiben
+Signierung, echte Watch und Watch-Version offen. Vor der Hindsight-Uebergabe
+den heutigen Agenten-/Memory-Bestand abgleichen.
 
 ## Arbeitskopie und Git Remotes
 
