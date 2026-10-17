@@ -66,8 +66,9 @@ Bereits identifizierter Kandidat: `owl/services/stt/asynchronous/async_whisper/a
 Serverarbeit kann unabhaengig von der Watch fortgesetzt werden. Der erste
 [konkrete Freigabevorschlag](proposals/SERVER-TRANSKRIPTION-FREIGABE.md) umfasst
 Token-Logging, sprachabhaengiges WhisperX-Alignment und die Weitergabe der
-vorhandenen Deepgram-Spracheinstellung. Ein anwendbarer Diff ist vorbereitet
-und geprueft, aber noch nicht angewendet. Danach folgen gesondert
+vorhandenen Deepgram-Spracheinstellung. Das Paket wurde ausdruecklich freigegeben, angewendet und mit fuenf
+Unit-Tests geprueft. Dockerisierung und GitHub-Release wurden beauftragt;
+[der erste Image-Build ist durch alte Paketquellen und Build-Werkzeuge blockiert](proposals/DOCKER-BUILD-FREIGABE.md). Danach folgen gesondert
 Verarbeitungsabschluss, Wiederaufnahme und Hindsight-Uebergabe.
 
 ## Phase 3 Uebergabe entwerfen und implementieren

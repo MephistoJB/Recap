@@ -10,8 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libavutil-dev libswresample-dev libswscale-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir poetry==1.8.5
 WORKDIR /app
+COPY deploy/build-constraints.txt /app/build-constraints.txt
+ENV PIP_CONSTRAINT=/app/build-constraints.txt
+RUN pip install --no-cache-dir poetry==1.8.5
 COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false \
     && poetry install --only main --no-root --no-ansi

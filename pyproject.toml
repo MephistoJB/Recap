@@ -21,7 +21,7 @@ pyannote-audio = "3.1.1"
 pydantic = "^2.5.3"
 click = "^8.1.7"
 torchvision = "^0.16.2"
-litellm = "^1.17.4"
+litellm = {git = "https://github.com/BerriAI/litellm.git", rev = "5fc6081b60d04c789cad96bb237ddf87f9f708c4"}
 fastapi = "^0.109.0"
 uvicorn = "^0.25.0"
 asyncio = "^3.4.3"
