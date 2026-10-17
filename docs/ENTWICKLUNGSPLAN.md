@@ -68,7 +68,11 @@ Serverarbeit kann unabhaengig von der Watch fortgesetzt werden. Der erste
 Token-Logging, sprachabhaengiges WhisperX-Alignment und die Weitergabe der
 vorhandenen Deepgram-Spracheinstellung. Das Paket wurde ausdruecklich freigegeben, angewendet und mit fuenf
 Unit-Tests geprueft. Dockerisierung und GitHub-Release wurden beauftragt;
-[der erste Image-Build ist durch alte Paketquellen und Build-Werkzeuge blockiert](proposals/DOCKER-BUILD-FREIGABE.md). Danach folgen gesondert
+[die freigegebene Build-Korrektur](proposals/DOCKER-BUILD-FREIGABE.md) ist umgesetzt.
+Das ARM64-Image hat den GitHub-Build und die Image-Smoke-Tests bestanden und
+wurde ueber Komodo auf den macserver heruntergeladen. Der Backend-Start und
+die echte Transkriptionspruefung warten auf den HF-Zugang; siehe
+[Bereitstellungsstand](../deploy/README.md). Danach folgen gesondert
 Verarbeitungsabschluss, Wiederaufnahme und Hindsight-Uebergabe.
 
 ## Phase 3 Uebergabe entwerfen und implementieren
@@ -180,7 +184,7 @@ Zurueckgestellt: ganztaegige automatische Aufnahme, neue Watch-Oberflaechen, aut
 
 ## Naechster Schritt
 
-Phase 1 fortsetzen: Nach erfolgreichem unsigniertem Build Signierung und echte Watch als Testziel klaeren. Watch-Version vervollstaendigen und heutigen Hindsight-/Agentenbestand rein lesend gegen die alte ADR abgleichen. Vor Backend-Bereitstellung Betriebsort und Provider sowie vor Patches deren konkreten Umfang freigeben. Noch keine produktiven Dienste oder Anwendungen aendern.
+Serverarbeit unabhaengig von der Watch fortsetzen: HF-Zugang in Psono bereitstellen, als geheime Komodo-Variable einbinden und das bereits getestete Image ueber den vorbereiteten Stack `owl` auf macserver starten. Danach Health, authentifizierte API und deutsche Audioverarbeitung testen. Dockerisierung, GitHub-Release und macserver als Betriebsort sind ausdruecklich freigegeben. Parallel bleiben Signierung, echte Watch und Watch-Version offen. Vor der Hindsight-Uebergabe den heutigen Agenten-/Memory-Bestand abgleichen; weitere Patches beziehungsweise Architekturentscheidungen gesondert freigeben.
 
 ## Arbeitskopie und Git Remotes
 

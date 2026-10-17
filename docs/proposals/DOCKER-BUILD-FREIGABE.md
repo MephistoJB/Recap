@@ -1,6 +1,7 @@
 # Freigabeentscheidung: reproduzierbarer Docker-Build
 
-Stand: 2026-10-17. Vom Nutzer freigegeben; Umsetzung und Buildpruefung laufen.
+Stand: 2026-10-17. Vom Nutzer freigegeben und umgesetzt. Der native ARM64-Build inklusive
+Image-Smoke-Tests ist erfolgreich; siehe [Betriebsstand](../../deploy/README.md).
 
 Bisheriger Commit: `8da5bab92de56d11ae845c6e258008aca4a4009e`.
 

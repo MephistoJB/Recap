@@ -1,5 +1,26 @@
 # Owl auf macserver mit Komodo
 
+## Verifizierter Stand vom 2026-10-17
+
+- [Vorschau-Release v0.1.0-owl.1](https://github.com/MephistoJB/Owl/releases/tag/v0.1.0-owl.1).
+- [Erfolgreicher Main-Build](https://github.com/MephistoJB/Owl/actions/runs/39022140586)
+  fuer Commit `63103110e069ba9f7fb3ee901cbeb147ff3ab5ef`.
+- Getestetes Image: `ghcr.io/mephistojb/owl:sha-63103110e069ba9f7fb3ee901cbeb147ff3ab5ef`.
+- Komodo ist auf den unveraenderlichen Digest
+  `ghcr.io/mephistojb/owl@sha256:b7a9cf37faa9fd3e11dd8afdeeb0ac200c837036633bdbe898bbb056eb4933cf`
+  eingestellt.
+- Komodo-Stack `owl` auf `Macserver`; Image-Pull erfolgreich (Update
+  `6ad344eac3b21f6d142d5840`). Kein Backend-Container gestartet.
+- Image auf Mac als `linux/arm64` geprueft; die tatsaechliche Mac-Konfiguration
+  laesst sich darin erfolgreich einlesen. Registry-Zugriff ist ohne Login
+  moeglich; das GHCR-Paket ist oeffentlich.
+- HF-Zugang fehlt weiterhin. Das entsprechende Komodo-Umgebungsfeld ist leer;
+  Compose verlangt einen Wert und verhindert so einen versehentlichen Start.
+- Nach Hinterlegung von `OWL_ASYNC_WHISPER_HF_TOKEN` in Psono und Modellfreigaben:
+  als geheime Komodo-Variable `OWL_HF_TOKEN` uebernehmen, den Stack auf deren
+  Referenz umstellen, ueber Komodo deployen und Modell-/API-Tests abschliessen.
+  Kein Ersatz-Token und kein Wechsel des Transkriptionsanbieters ist eingerichtet.
+
 ## Bereitstellungsumfang
 
 Ein ARM64-Backend-Image aus dem Fork wird ueber GHCR veroeffentlicht. Komodo
