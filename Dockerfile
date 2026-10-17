@@ -14,12 +14,11 @@ WORKDIR /app
 COPY deploy/build-constraints.txt /app/build-constraints.txt
 ENV PIP_CONSTRAINT=/app/build-constraints.txt
 RUN pip install --no-cache-dir poetry==1.8.5
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock README.md ./
 RUN poetry check --lock \
     && poetry export --only main --format=requirements.txt --without-hashes --output=/app/requirements.txt \
     && pip install --no-cache-dir --no-deps --requirement /app/requirements.txt
 COPY owl ./owl
-COPY README.md ./
 RUN poetry install --only-root --no-ansi
 
 FROM python:3.11-slim-bookworm AS runtime
