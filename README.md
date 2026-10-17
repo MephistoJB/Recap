@@ -1,5 +1,11 @@
 # Owl - Always-on Wearable AI
 
+## Native macOS app in this fork
+
+This fork now includes a native SwiftUI Mac app with local transcription, a persistent library, audio import/recording, and an embedded receiver for the Owl HTTP upload protocol. Python and Docker are not required for this app.
+
+See [macOS build and usage](clients/macos/README.md) and the [implementation status and remaining acceptance checks](docs/MACOS-APP-UMSETZUNGSSTAND.md). The upstream setup and feature list below describe the original Owl backend; they do not imply that every upstream feature has been ported to macOS.
+
 [![](https://dcbadge.vercel.app/api/server/BSMSJgFQTv?style=flat)](https://discord.gg/BSMSJgFQTv)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/ethansutin.svg?style=social&label=Follow%20%40ethansutin)](https://twitter.com/ethansutin)
