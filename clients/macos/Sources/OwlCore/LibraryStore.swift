@@ -79,7 +79,11 @@ import CryptoKit
         let digest = SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
         let existing = try chunks(uuid)
         if let duplicate = existing.first(where: { $0.number == parsed.number }) {
-            guard duplicate.digest == digest else { throw OwlError.conflict("Chunk wurde mit anderem Inhalt bereits empfangen.") }
+            let item = try find(uuid)
+            guard duplicate.digest == digest, item?.uploadFormat == parsed.ext,
+                  item?.uploadTimestamp == timestamp else {
+                throw OwlError.conflict("Chunk wurde mit anderem Inhalt oder anderen Metadaten bereits empfangen.")
+            }
             return false
         }
         let item: Recording
@@ -132,10 +136,17 @@ import CryptoKit
         let audioName = item.audioName
         let audio = paths.audio.appendingPathComponent(audioName)
         let chunkDirectory = paths.chunks.appendingPathComponent(item.uuid)
+        // Keep the entry visible when a file cannot be deleted; never report a
+        // successful deletion while silently leaving the original audio behind.
+        if !audioName.isEmpty, FileManager.default.fileExists(atPath: audio.path) {
+            try FileManager.default.removeItem(at: audio)
+        }
+        if FileManager.default.fileExists(atPath: chunkDirectory.path) {
+            try FileManager.default.removeItem(at: chunkDirectory)
+        }
         for part in try chunks(item.uuid) { context.delete(part) }
-        context.delete(item); try save()
-        if !audioName.isEmpty { try? FileManager.default.removeItem(at: audio) }
-        try? FileManager.default.removeItem(at: chunkDirectory)
+        context.delete(item)
+        do { try save() } catch { context.rollback(); throw error }
     }
 }
 

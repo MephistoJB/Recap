@@ -52,10 +52,11 @@ fuer diese Umsetzung weder gestartet noch geloescht.
 
 M4 Pro, 24 GB RAM, macOS 27.0, Swift 6.4, ARM64-Release-Build.
 
-- Sieben native Tests erfolgreich: persistente Duplikaterkennung nach erneutem
+- Acht native Tests erfolgreich: persistente Duplikaterkennung nach erneutem
   Oeffnen, Konflikte, fehlende Chunks, numerischer Zusammenbau, wiederholter
   Abschluss, Wiederanlauf, nicht wiederverwendete Gespraechs-IDs,
-  Sprecherunsicherheit, ungueltige Pfade/Zeitpunkte sowie binaeres Multipart.
+  Sprecherunsicherheit, ungueltige Pfade/Zeitpunkte, binaeres Multipart und
+  sichtbarer Bibliothekseintrag bei fehlgeschlagener Audio-Loeschung.
 - HTTP-Integration mit 17 erfolgreichen Pruefpunkten: Anmeldung, originale
   Pfade einschliesslich abschliessendem Slash, Upload ausser Reihenfolge,
   Luecken/409, Wiederholungen, widerspruechliche Wiederholungen/409,

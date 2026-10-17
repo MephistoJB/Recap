@@ -13,6 +13,8 @@ final class LibraryTests: XCTestCase {
         let reopened = try LibraryStore(paths: store.paths)
         XCTAssertFalse(try reopened.receive(filename: name, uuid: uuid, timestamp: timestamp, source: "apple_watch", data: Data([0, 1])))
         XCTAssertThrowsError(try reopened.receive(filename: name, uuid: uuid, timestamp: timestamp, source: "apple_watch", data: Data([2, 3])))
+        XCTAssertThrowsError(try reopened.receive(filename: "audio_\(uuid)_20261018-120000.000_0.pcm", uuid: uuid,
+                                                 timestamp: "20261018-120000.000", source: "apple_watch", data: Data([0, 1])))
         XCTAssertEqual(try reopened.chunks(uuid).count, 1)
     }
     @MainActor func testChunkGapsAndNumericAssembly() throws {
@@ -57,6 +59,21 @@ final class LibraryTests: XCTestCase {
         try store.remove(first)
         let second = try store.insert(title: "Zweiter Eintrag", source: "import")
         XCTAssertGreaterThan(second.apiID, id)
+    }
+    @MainActor func testFailedAudioDeletionKeepsLibraryEntryVisible() throws {
+        let store = try temporaryStore()
+        defer {
+            try? FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: store.paths.audio.path)
+            try? FileManager.default.removeItem(at: store.paths.root)
+        }
+        let item = try store.insert(title: "Geschützte Datei", source: "import", audioName: "protected.wav")
+        let uuid = item.uuid
+        let file = store.paths.audio.appendingPathComponent(item.audioName)
+        try Data([0, 1]).write(to: file)
+        try FileManager.default.setAttributes([.posixPermissions: 0o500], ofItemAtPath: store.paths.audio.path)
+        XCTAssertThrowsError(try store.remove(item))
+        XCTAssertNotNil(try store.find(uuid))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: file.path))
     }
     func testTraversalAndInvalidTimestampAreRejected() {
         let uuid = String(repeating: "c", count: 32)
