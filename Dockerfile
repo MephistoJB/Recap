@@ -15,8 +15,9 @@ COPY deploy/build-constraints.txt /app/build-constraints.txt
 ENV PIP_CONSTRAINT=/app/build-constraints.txt
 RUN pip install --no-cache-dir poetry==1.8.5
 COPY pyproject.toml poetry.lock ./
-RUN poetry config virtualenvs.create false \
-    && poetry install --only main --no-root --no-ansi
+RUN poetry check --lock \
+    && poetry export --only main --format=requirements.txt --without-hashes --output=/app/requirements.txt \
+    && pip install --no-cache-dir --no-deps --requirement /app/requirements.txt
 COPY owl ./owl
 COPY README.md ./
 RUN poetry install --only-root --no-ansi

@@ -41,7 +41,9 @@ endet bei `poetry install`. Die fuenf Unit-Tests waren erfolgreich.
 - `deploy/build-constraints.txt` neu: `setuptools==69.0.3` und
   `poetry-core==1.9.1` fuer die Legacy-Builds pinnen.
 - `Dockerfile`: Constraint-Datei vor Paketinstallation kopieren und mit
-  `PIP_CONSTRAINT` an die isolierten Paketbuilds weitergeben.
+  `PIP_CONSTRAINT` an die isolierten Paketbuilds weitergeben. Dafuer das
+  gepruefte Poetry-Lockfile exportieren und mit pip `--no-deps` installieren;
+  Poetry 1.8s eigener Build-Installer ignoriert pip-Constraints.
 
 Kein Patch an LiteLLM, WhisperX oder installierten Bibliotheksdateien;
 kein zusaetzlicher Dienst. Falls weitere Laufzeit- oder Sourcecode-Aenderungen

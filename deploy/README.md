@@ -74,3 +74,16 @@ Datenvolume nicht loeschen. Bei der Erstbereitstellung kann der Stack gestoppt
 werden; keine bestehenden Mac-Stacks oder Dienste werden dafuer entfernt.
 Vor spaeteren Aenderungen an Datenbankschema oder Datenformat gesonderte
 Backup-/Rollback-Pruefung vornehmen.
+
+## Build-Werkzeuge und Lockfile
+
+LiteLLM 1.21.1 wird aus dem fest gebundenen offiziellen GitHub-Quellcommit
+bezogen, weil die alten PyPI-Dateien nicht mehr verfuegbar sind. Poetry prueft
+und exportiert das Lockfile; pip installiert den vollstaendig gepinnten Export
+mit `--no-deps`, damit keine Laufzeitversionen neu aufgeloest werden.
+Dieser unterstuetzte Exportweg sorgt dafuer, dass `PIP_CONSTRAINT` auch bei
+isolierten Legacy-Paketbuilds greift. Poetry 1.8s eigener Build-Installer
+uebernimmt diese pip-Einstellung nicht. Es werden keine Bibliotheken gepatcht.
+Der Export enthaelt wegen der Git-Quellen keine pip-Hashpflicht; Versions- und
+Quellcommit-Pins bleiben erhalten. Dies ist kein Nachweis fuer Bytegleichheit
+mit den inzwischen entfernten LiteLLM-Distributionsdateien.
