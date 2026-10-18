@@ -71,6 +71,7 @@ func runFileUploadPass(fileExtension: String, directory: URL = .documents, sessi
         }
         var allUploaded = true
         for url in groups[id] ?? [] {
+            guard uploadAllowed, !Task.isCancelled else { return }
             UploadStatus.shared.message = "Aufnahme wird zum Mac übertragen …"
             if await uploadFile(url, contentType: "audio/\(fileExtension)", session: session) {
                 do { try FileManager.default.removeItem(at: url) }
@@ -78,6 +79,7 @@ func runFileUploadPass(fileExtension: String, directory: URL = .documents, sessi
             } else { allUploaded = false; failed = true; break }
         }
         if allUploaded {
+            guard uploadAllowed, !Task.isCancelled else { return }
             UploadStatus.shared.message = "Verarbeitung auf dem Mac anfordern …"
             if await processCapture(id, session: session) {
                 do { try FileManager.default.removeItem(at: directory.appendingPathComponent("\(id).end")) }

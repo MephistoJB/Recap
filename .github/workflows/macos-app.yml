@@ -59,4 +59,4 @@ jobs:
           -derivedDataPath /tmp/recap-client-build
           -parallel-testing-enabled NO
           -only-testing:RecapTests
-          CODE_SIGNING_ALLOWED=NO test
+          CODE_SIGN_IDENTITY="-" CODE_SIGNING_ALLOWED=YES test

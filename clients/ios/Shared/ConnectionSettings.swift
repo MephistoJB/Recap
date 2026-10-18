@@ -42,13 +42,14 @@ enum ConnectionSettings {
             var item = keyQuery
             item[kSecValueData as String] = value
             item[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
-            guard SecItemAdd(item as CFDictionary, nil) == errSecSuccess else { throw SettingsError.keychain }
-        } else if status != errSecSuccess { throw SettingsError.keychain }
+            let added = SecItemAdd(item as CFDictionary, nil)
+            guard added == errSecSuccess else { throw SettingsError.keychain(added) }
+        } else if status != errSecSuccess { throw SettingsError.keychain(status) }
         UserDefaults.standard.set(url.absoluteString.trimmingCharacters(in: CharacterSet(charactersIn: "/")), forKey: addressKey)
         DispatchQueue.main.async { NotificationCenter.default.post(name: changed, object: nil) }
     }
     enum SettingsError: LocalizedError {
-        case invalid, keychain
+        case invalid, keychain(OSStatus)
         var errorDescription: String? {
             switch self {
             case .invalid: return "Bitte eine vollständige HTTP(S)-Adresse und den Zugriffstoken des Mac eingeben."

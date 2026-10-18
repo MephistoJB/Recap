@@ -36,6 +36,7 @@ final class RecapTests: XCTestCase {
     }
     private func session() throws -> URLSession {
         try ConnectionSettings.save(address: "http://recap-tests.invalid", token: "test-only-not-a-real-token")
+        XCTAssertEqual(ConnectionSettings.token, "test-only-not-a-real-token")
         setUploadAllowed(to: true)
         UploadProtocol.paths = []
         let config = URLSessionConfiguration.ephemeral
