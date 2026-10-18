@@ -3,6 +3,28 @@
 Stand 2026-10-18. Der signierte Geraetebuild wird auf dem MacBook vorbereitet;
 der native Mac auf macserver bleibt Empfaenger und Transkriptionsort.
 
+## Separat freigegebener Startfix (2026-10-18)
+
+Der echte iPhone-Absturz wurde anhand des Geraeteberichts auf
+`SocketManager.swift:19` zurueckgefuehrt: Die leere Serveradresse wird
+erzwungen als URL ausgepackt. Der Benutzer hat den gezielten Fix in
+`SocketManager.swift` und `ConversationsViewModel.swift` einschliesslich
+Neubau, iPhone-Update und Startpruefung separat freigegeben.
+
+Der Socket-Manager bleibt ohne gueltige absolute HTTP(S)-Adresse inaktiv;
+Senden, Verbinden und das Registrieren der Listener behandeln den fehlenden
+Socket kontrolliert. Der signierte Xcode-Build und die Signaturpruefung
+bestehen; die korrigierte iPhone-App ist installiert. Die Watch-App wurde
+fuer diese Korrektur nicht separat installiert oder gestartet.
+Die Startpruefung am iPhone ist noch offen: Der erste Startaufruf wurde vom
+System wegen der Geraetesperre abgelehnt (`FBSOpenApplicationErrorDomain`,
+`Locked`), bevor die App ausgefuehrt werden konnte.
+
+Diese Freigabe umfasst noch nicht den nachfolgenden vollstaendigen
+Konfigurations- und Upload-Umbau. Rueckweg fuer den Startfix: die beiden
+Quellcodedateien per Revert zuruecknehmen, neu bauen und das iPhone-Update
+erneut installieren; keine App-Deinstallation erforderlich.
+
 ## Vor der ersten Aufnahme
 
 Die vorhandenen Clients haben keine ausgefuellte Serveradresse und keinen

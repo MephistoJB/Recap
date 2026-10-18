@@ -49,7 +49,9 @@ class ConversationsViewModel: ObservableObject {
     }
     
     private func setupSocketListeners() {
-        socketManager.socket.on("new_conversation") { [weak self] data, ack in
+        guard let socket = socketManager.socket else { return }
+
+        socket.on("new_conversation") { [weak self] data, ack in
             guard let self = self else { return }
 
             if let conversationJsonString = data[0] as? String,
@@ -66,7 +68,7 @@ class ConversationsViewModel: ObservableObject {
             }
         }
         
-        socketManager.socket.on("update_conversation") { [weak self] data, ack in
+        socket.on("update_conversation") { [weak self] data, ack in
             guard let self = self else { return }
 
             if let conversationJsonString = data[0] as? String,
@@ -89,7 +91,7 @@ class ConversationsViewModel: ObservableObject {
             }
         }
         
-        socketManager.socket.on("delete_conversation") { [weak self] data, ack in
+        socket.on("delete_conversation") { [weak self] data, ack in
             guard let self = self else { return }
 
             if let conversationJsonString = data[0] as? String,
@@ -112,7 +114,7 @@ class ConversationsViewModel: ObservableObject {
             }
         }
         
-        socketManager.socket.on("new_utterance") { [weak self] data, ack in
+        socket.on("new_utterance") { [weak self] data, ack in
             guard let self = self,
                   let dataArray = data[0] as? [String: Any],
                   let conversationUUID = dataArray["conversation_uuid"] as? String,

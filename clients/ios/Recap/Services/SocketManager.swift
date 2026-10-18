@@ -11,12 +11,21 @@ import SocketIO
 class SocketManager: ObservableObject {
     static let shared = SocketManager() // Singleton instance
 
-    var socket: SocketIOClient!
+    let socket: SocketIOClient?
     
-    private let socketManager: SocketIO.SocketManager // Renamed to avoid naming conflict
+    private let socketManager: SocketIO.SocketManager?
    
     private init() {
-        socketManager = SocketIO.SocketManager(socketURL: URL(string: AppConstants.apiBaseURL)!, config: [
+        guard let url = URL(string: AppConstants.apiBaseURL),
+              let scheme = url.scheme?.lowercased(),
+              ["http", "https"].contains(scheme),
+              let host = url.host, !host.isEmpty else {
+            socketManager = nil
+            socket = nil
+            return
+        }
+
+        let manager = SocketIO.SocketManager(socketURL: url, config: [
             .log(false),
             .compress,
             .reconnects(true),
@@ -25,7 +34,9 @@ class SocketManager: ObservableObject {
             .reconnectWaitMax(5),
             .extraHeaders(["Authorization": "Bearer \(AppConstants.clientToken)"])
         ])
-        socket = socketManager.defaultSocket
+        socketManager = manager
+        let socket = manager.defaultSocket
+        self.socket = socket
 
         socket.on(clientEvent: .connect) { data, ack in
             print("socket connected")
@@ -35,17 +46,16 @@ class SocketManager: ObservableObject {
     }
 
     func connect() {
-        if !socket.status.active {
-            socket.connect()
-        }
+        guard let socket, !socket.status.active else { return }
+        socket.connect()
     }
 
     func sendAudioData(_ data: Data, capture: Capture) {
-        socket.emit("audio_data", data, capture.deviceName, capture.captureUUID)
+        socket?.emit("audio_data", data, capture.deviceName, capture.captureUUID)
     }
     
     func finishAudio(capture: Capture) {
-        socket.emit("finish_audio", capture.captureUUID)
+        socket?.emit("finish_audio", capture.captureUUID)
     }
     
 }
