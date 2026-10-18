@@ -93,3 +93,20 @@ Verweise, Plist-Syntax und die deckenden 1024-px-iPhone-/Watch-Icons sind geprue
 
 Geprueftes App-ZIP: `clients/macos/artifacts/Recap-macOS-arm64.zip`
 (11,145,247 Bytes; SHA256 `5dbcb46f3889114d67ce01d81910106950dbb7f132c55ee0d7d4a47e84915c82`).
+
+## Eigene Apple-App-Kennungen (2026-10-18)
+
+Beim ersten signierten Geraetebuild hat Apple die alten `com.owl.Owl`-
+Kennungen fuer das eigene Entwicklerteam abgelehnt. iPhone und Watch
+verwenden deshalb `org.bechara.recap`, `org.bechara.recap.watchkitapp`
+und `org.bechara.recap.watchkitapp.extension`; Testtargets sind entsprechend
+zugeordnet. Companion-Verweise wurden mit umgestellt. Das Xcode-Projekt
+verwendet das vorhandene eigene Entwicklerteam. Die Mac-App behaelt ihre
+bisherige Kennung und Bibliothek. Vorhandene Apps unter anderen Kennungen
+werden durch eine Installation unter den neuen Kennungen nicht ersetzt.
+
+Die Profile fuer die drei neuen App-Kennungen wurden auf dem MacBook geladen.
+Der Geraetebuild besteht ohne Signierung; die Signierung wird gerade im lokalen
+Terminal-Kontext geprueft, weil der SSH-Aufruf den privaten Signierschluessel
+noch nicht verwenden konnte. Eine erfolgreiche Installation wird erst nach
+Ruecklesen der installierten App bestaetigt.

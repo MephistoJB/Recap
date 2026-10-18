@@ -47,7 +47,7 @@ Owl-eigene Zusammenfassungen sind fuer diesen Ablauf optional. Das Transkript bl
 
 - [x] Bestehende Projektarchitektur und Hindsight-Entscheidung lokal gelesen.
 - [x] Owl-Fork `MephistoJB/Owl` angelegt und unter `/root/Documents/Programmierung/Owl` geklont; Ausgangscommit `91922655c3cbf0e5f3282c22806b5ac0cf30063e`. Weitere Installationen bleiben bei Bedarf zu pruefen.
-- [ ] Aktuelle Watch-, iPhone- und Xcode-Version sowie Testgeraete erfassen. Teilstand: Nutzer nennt „Ultra 12“ und iOS 27; Xcode erkennt ein echtes iPhone 12 Pro Max. Watch-Modell/watchOS noch eindeutig zu erfassen; keine echte Watch in der Geraeteliste. macserver: Xcode 27.0 (27A266a), macOS 27.0, iOS-/watchOS-27-SDKs verifiziert.
+- [x] Testgeraete und Entwicklungsrechner erfasst: echte Apple Watch Ultra 3 mit watchOS 27.0, iPhone 12 Pro Max mit iOS 27. MacBook: Xcode 27.1, beide Geraete erreichbar und App-Abfragen erfolgreich. macserver: Xcode 27.0; das iPhone ist gekoppelt, die Watch wird nicht erkannt. Die Geraetebuilds werden deshalb auf dem MacBook vorbereitet.
 - [ ] Ist-Zustand der bestehenden Hindsight-Anbindung und unterstuetzte API-Funktionen pruefen.
 - [x] Ohne Installationsaenderungen ermitteln, welche Voraussetzungen fuer einen Owl-Build fehlen. Quellen- und Umgebungspruefung siehe [Phase-1-Bestandsaufnahme](PHASE-1-BESTANDSAUFNAHME.md). Die anfaengliche Xcode-Lizenzblockade ist inzwischen behoben; Mac-Arbeitskopie und unsignierter Build sind vorhanden. Signierung, echte Watch und Backend-Konfiguration bleiben offen.
 - [ ] Build und Testbereitstellung nach Freigabe des konkreten Umfangs vorbereiten. Teilstand: Xcode-Nutzung auf macserver freigegeben; unsignierter iOS-Build einschliesslich Watch-App und Erweiterung erfolgreich. Keine Installation auf Geraeten.
