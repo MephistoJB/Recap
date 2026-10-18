@@ -105,8 +105,23 @@ verwendet das vorhandene eigene Entwicklerteam. Die Mac-App behaelt ihre
 bisherige Kennung und Bibliothek. Vorhandene Apps unter anderen Kennungen
 werden durch eine Installation unter den neuen Kennungen nicht ersetzt.
 
-Die Profile fuer die drei neuen App-Kennungen wurden auf dem MacBook geladen.
-Der Geraetebuild besteht ohne Signierung; die Signierung wird gerade im lokalen
-Terminal-Kontext geprueft, weil der SSH-Aufruf den privaten Signierschluessel
-noch nicht verwenden konnte. Eine erfolgreiche Installation wird erst nach
-Ruecklesen der installierten App bestaetigt.
+Der signierte Geraetebuild auf dem MacBook ist nach Freigabe des
+Schluesselbunddialogs im lokalen Terminal erfolgreich. Beide App-Pakete
+bestehen `codesign --verify --deep --strict`. Die iPhone-App wurde installiert
+und anschliessend in der App-Liste des echten iPhones bestaetigt.
+
+Auch die Watch-App ist jetzt installiert und in der App-Liste der echten
+Watch bestaetigt. Zunaechst enthielten ihre Profile nur die iPhone-Kennung
+und wurden mit `0xe8008012` abgelehnt. Nach Wiederherstellung der
+Watch-Verbindung wurde direkt in der geoeffneten Xcode-App fuer die echte
+Watch gebaut: Beide Watch-Profile enthalten nun deren Geraetekennung.
+Der Kommandozeilen-Build hatte den Entwickleraccount fuer die Erneuerung
+nicht verwenden koennen. Anschliessend wurden die geprueften Pakete auf
+beiden Geraeten erfolgreich installiert und jeweils zurueckgelesen.
+Die vorhandene Kopplung wurde nicht geloescht. Die aktuellen Profile laufen
+am 25.10.2026 ab und erfordern danach einen erneuten signierten Build.
+
+Noch keine Aufnahme oder erfolgreiche Client-Mac-Uebertragung: Serveradresse
+und Token sind in den Clients noch leer. Der konkrete, separat zur Freigabe
+vorgelegte Umbau steht in
+[Client-Geraeteinbetriebnahme](proposals/CLIENT-GERAETEINBETRIEBNAHME.md).
