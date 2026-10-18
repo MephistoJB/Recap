@@ -25,6 +25,15 @@ Konfigurations- und Upload-Umbau. Rueckweg fuer den Startfix: die beiden
 Quellcodedateien per Revert zuruecknehmen, neu bauen und das iPhone-Update
 erneut installieren; keine App-Deinstallation erforderlich.
 
+## Freigabe des vollstaendigen Client-Umbaus
+
+Der Benutzer hat den nachfolgenden Umfang nach Erlaeuterung der noch fehlenden
+Mac-Verbindung ausdruecklich mit „Ja“ freigegeben. Dazu gehoeren Einstellungen,
+Schluesselbundspeicherung, ausdruecklicher Watch-Transfer und sichere Uploads.
+Die API-Abfrage verwendet die gespeicherte Verbindung; die vorhandenen
+Simulator-Tests pruefen den Dateierhalt, und der bestehende GitHub-Pruefworkflow
+wird um diese Client-Pruefungen erweitert.
+
 ## Vor der ersten Aufnahme
 
 Die vorhandenen Clients haben keine ausgefuellte Serveradresse und keinen

@@ -16,33 +16,9 @@ class SocketManager: ObservableObject {
     private let socketManager: SocketIO.SocketManager?
    
     private init() {
-        guard let url = URL(string: AppConstants.apiBaseURL),
-              let scheme = url.scheme?.lowercased(),
-              ["http", "https"].contains(scheme),
-              let host = url.host, !host.isEmpty else {
-            socketManager = nil
-            socket = nil
-            return
-        }
-
-        let manager = SocketIO.SocketManager(socketURL: url, config: [
-            .log(false),
-            .compress,
-            .reconnects(true),
-            .reconnectAttempts(-1),
-            .reconnectWait(1),
-            .reconnectWaitMax(5),
-            .extraHeaders(["Authorization": "Bearer \(AppConstants.clientToken)"])
-        ])
-        socketManager = manager
-        let socket = manager.defaultSocket
-        self.socket = socket
-
-        socket.on(clientEvent: .connect) { data, ack in
-            print("socket connected")
-        }
-
-        connect()
+        // The native Mac receiver uses HTTP after recording, not Socket.IO.
+        socketManager = nil
+        socket = nil
     }
 
     func connect() {

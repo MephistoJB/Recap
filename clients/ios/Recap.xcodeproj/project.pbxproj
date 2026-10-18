@@ -64,6 +64,9 @@
 		CCD7A5C92B621ABE0079D9D4 /* UUID+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7A5C72B6219AD0079D9D4 /* UUID+Extensions.swift */; };
 		CCD7A5CB2B621D1A0079D9D4 /* FileUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7A5CA2B621D1A0079D9D4 /* FileUploadTask.swift */; };
 		CCD7A5CC2B621D210079D9D4 /* FileUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7A5CA2B621D1A0079D9D4 /* FileUploadTask.swift */; };
+		C0A000000000000000000011 /* ConnectionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A000000000000000000001 /* ConnectionSettings.swift */; };
+		C0A000000000000000000012 /* ConnectionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A000000000000000000001 /* ConnectionSettings.swift */; };
+		C0A000000000000000000013 /* ConnectionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A000000000000000000002 /* ConnectionSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +196,8 @@
 		CCD7A5C42B6217830079D9D4 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		CCD7A5C72B6219AD0079D9D4 /* UUID+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UUID+Extensions.swift"; sourceTree = "<group>"; };
 		CCD7A5CA2B621D1A0079D9D4 /* FileUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadTask.swift; sourceTree = "<group>"; };
+		C0A000000000000000000001 /* ConnectionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSettings.swift; sourceTree = "<group>"; };
+		C0A000000000000000000002 /* ConnectionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recap/Views/ConnectionSettingsView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +378,7 @@
 		AAB582112B530FD400CB72B8 /* Recap */ = {
 			isa = PBXGroup;
 			children = (
+				C0A000000000000000000002 /* ConnectionSettingsView.swift */,
 				AA84B1CA2B606AAB00FD654C /* Views */,
 				AA84B1C72B604F7E00FD654C /* ViewModels */,
 				AA84B1BD2B601C6C00FD654C /* Models */,
@@ -457,6 +463,7 @@
 				CCD7A5C32B62176E0079D9D4 /* Extensions */,
 				CCD7A5BF2B6217260079D9D4 /* Files */,
 				CCD7A5BB2B6215F10079D9D4 /* Util */,
+				C0A000000000000000000001 /* ConnectionSettings.swift */,
 				AAB582742B53131900CB72B8 /* AppConstants.swift */,
 			);
 			path = Shared;
@@ -773,10 +780,12 @@
 				AAB714792B62B23500412DB7 /* Location.swift in Sources */,
 				AA84B1C12B601DDD00FD654C /* Conversation.swift in Sources */,
 				CCD7A5CC2B621D210079D9D4 /* FileUploadTask.swift in Sources */,
+				C0A000000000000000000013 /* ConnectionSettingsView.swift in Sources */,
 				AAB582152B530FD400CB72B8 /* ContentView.swift in Sources */,
 				AA7E36B02B55878400789EB0 /* BLEManager.swift in Sources */,
 				AA84B1C62B6041AB00FD654C /* JSONDecoder+Extensions.swift in Sources */,
 				AAB7147D2B64153B00412DB7 /* CaptureManager.swift in Sources */,
+				C0A000000000000000000011 /* ConnectionSettings.swift in Sources */,
 				AAB582752B53131A00CB72B8 /* AppConstants.swift in Sources */,
 				AA7E36B42B558FB400789EB0 /* FrameSequencer.swift in Sources */,
 				AA7E36B62B55925300789EB0 /* SocketManager.swift in Sources */,
@@ -827,6 +836,7 @@
 				CCD7A5C52B6217830079D9D4 /* URL+Extensions.swift in Sources */,
 				CCD7A5BA2B6202190079D9D4 /* SettingsView.swift in Sources */,
 				CCD7A5CB2B621D1A0079D9D4 /* FileUploadTask.swift in Sources */,
+				C0A000000000000000000012 /* ConnectionSettings.swift in Sources */,
 				AAB582762B53131A00CB72B8 /* AppConstants.swift in Sources */,
 				AAB582782B53140800CB72B8 /* CaptureManager.swift in Sources */,
 				AAB714812B65A9D600412DB7 /* WatchConnectivityManager.swift in Sources */,

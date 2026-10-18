@@ -12,7 +12,7 @@ class API {
     private init() {}
 
     func fetchConversations(completionHandler: @escaping (ConversationsResponse) -> Void) {
-        guard let url = URL(string: "\(AppConstants.apiBaseURL)/conversations/") else { return }
+        guard let url = ConnectionSettings.endpoint("conversations") else { return }
         var request = URLRequest(url: url)
         request.addCommonHeaders()
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in

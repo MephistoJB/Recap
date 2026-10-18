@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['clients/macos/**', '.github/workflows/macos-app.yml']
+    paths: ['clients/macos/**', 'clients/ios/**', '.github/workflows/macos-app.yml']
   pull_request:
-    paths: ['clients/macos/**', '.github/workflows/macos-app.yml']
+    paths: ['clients/macos/**', 'clients/ios/**', '.github/workflows/macos-app.yml']
 
 permissions:
   contents: read
@@ -34,3 +34,29 @@ jobs:
           name: Recap-macOS-development
           path: clients/macos/artifacts/Recap-macOS-arm64.zip
           retention-days: 14
+
+  ios-client:
+    runs-on: macos-26
+    defaults:
+      run:
+        working-directory: clients/ios
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Choose iPhone simulator
+        run: |
+          xcrun simctl list devices available -j > /tmp/recap-simulators.json
+          python3 - <<'PYTHON'
+          import json, os
+          devices = json.load(open('/tmp/recap-simulators.json'))['devices']
+          device = next(d for group in devices.values() for d in group if d['name'].startswith('iPhone'))
+          with open(os.environ['GITHUB_ENV'], 'a') as f:
+              f.write('RECAP_SIMULATOR_ID=' + device['udid'] + '\n')
+          PYTHON
+      - name: Test upload retention and interrupted recordings
+        run: >-
+          xcodebuild -project Recap.xcodeproj -scheme Recap
+          -destination "platform=iOS Simulator,id=$RECAP_SIMULATOR_ID"
+          -derivedDataPath /tmp/recap-client-build
+          -parallel-testing-enabled NO
+          -only-testing:RecapTests
+          CODE_SIGNING_ALLOWED=NO test

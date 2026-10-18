@@ -28,10 +28,26 @@ class WatchConnectivityManager: NSObject, WCSessionDelegate {
         }
     }
 
-    // WCSessionDelegate methods
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
+    private func receiveConfiguration(_ context: [String: Any]) {
+        guard let config = context["recapConnection"] as? [String: String],
+              let address = config["address"], let token = config["token"] else { return }
+        do {
+            try ConnectionSettings.save(address: address, token: token)
+            try session?.updateApplicationContext(["configurationSaved": true])
+            sendMessage(["configurationSaved": true])
+        } catch {
+            try? session?.updateApplicationContext(["configurationSaved": false])
+            sendMessage(["configurationSaved": false])
+        }
     }
 
- 
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        receiveConfiguration(applicationContext)
+    }
+
+    // WCSessionDelegate methods
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if activationState == .activated { receiveConfiguration(session.receivedApplicationContext) }
+    }
+
 }

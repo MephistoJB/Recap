@@ -1,38 +1,29 @@
-//
-//  SettingsView.swift
-//  Recap Watch App
-//
-//  Created by Bart Trzynadlowski on 1/24/24.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
     @Binding var isStreaming: Bool
     @Binding var isUploading: Bool
+    @AppStorage(ConnectionSettings.addressKey) private var address = ""
+    @ObservedObject private var upload = UploadStatus.shared
 
     var body: some View {
-        VStack {
-            Toggle("Live Stream", isOn: $isStreaming)
-                .padding()
-            Toggle("Upload", isOn: $isUploading)
-                .disabled(isStreaming)
-                .padding()
-
-            Text("Capture Mode:")
-            if isStreaming {
-                Text("Live stream")
-            } else {
-                if isUploading {
-                    Text("Spool and upload files")
-                } else {
-                    Text("Spool to disk")
-                }
+        Form {
+            Section("Mac-Verbindung") {
+                Text(address.isEmpty ? "Auf dem iPhone einrichten und an Watch senden" : address)
+                    .font(.footnote)
+                Text(ConnectionSettings.isConfigured ? "Verbindung gespeichert" : "Verbindung fehlt")
+                    .font(.footnote)
             }
-        }
+            Section("Übertragung") {
+                Toggle("Upload nach Aufnahmeende", isOn: $isUploading)
+                Text(upload.message).font(.footnote)
+                Text("Lokale Audiodateien: \(upload.pendingChunks)").font(.footnote)
+                Text("Live-Streaming ist für diesen Ablauf deaktiviert.").font(.footnote).foregroundStyle(.secondary)
+            }
+        }.onAppear { isStreaming = false }
     }
 }
 
 #Preview {
-    SettingsView(isStreaming: .constant(true), isUploading: .constant(true))
+    SettingsView(isStreaming: .constant(false), isUploading: .constant(true))
 }

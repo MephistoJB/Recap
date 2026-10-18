@@ -8,13 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel = ConversationsViewModel()
+    @StateObject var viewModel = ConversationsViewModel()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         NavigationView {
             ConversationsView(viewModel: viewModel)
                 .navigationTitle("Conversations")
-                .navigationBarItems(trailing: BadgeView())
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: ConnectionSettingsView()) {
+                            Label("Verbindung", systemImage: "gearshape")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) { BadgeView() }
+                }
+                .overlay {
+                    if !ConnectionSettings.isConfigured && viewModel.conversations.isEmpty {
+                        VStack(spacing: 12) {
+                            Text("Verbinde Recap mit deinem Mac").font(.headline)
+                            NavigationLink("Verbindung einrichten", destination: ConnectionSettingsView())
+                            Text("Watch-Aufnahmen erscheinen nach der Übertragung und Verarbeitung auf dem Mac.")
+                                .font(.footnote).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                        }.padding()
+                    }
+                }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: ConnectionSettings.changed)) { _ in viewModel.fetchConversations() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { viewModel.fetchConversations() }
         }
     }
 
