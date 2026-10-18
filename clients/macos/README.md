@@ -34,11 +34,16 @@ deine Clients vorgesehenen Token eintragen, Port einstellen und **Empfang
 starten**. Default: `0.0.0.0:8012`. Die App startet den Empfaenger nicht
 unbemerkt beim Oeffnen. Token werden im macOS-Schluesselbund gespeichert.
 
-Bestehende Clients muessen die Mac-Adresse und denselben Bearer-Token verwenden.
-Der bisherige iOS-/Watch-Code konfiguriert dies in
-`clients/ios/Shared/AppConstants.swift`. Eine neue Geraeteinstallation mit
-Signierung/Provisionierung ist nicht Teil des macOS-Builds. Die Original-
-Client-Dateien wurden fuer diesen App-Stand nicht gepatcht.
+Auf dem iPhone unter **Verbindung** Mac-Adresse und denselben Token speichern,
+die Verbindung pruefen und ausdruecklich an die gekoppelte Watch senden.
+Der Token wird auf jedem Geraet im eigenen Schluesselbund gespeichert.
+Die Watch laedt nach Aufnahmeende hoch und entfernt Dateien erst nach einer
+HTTP-Bestaetigung des Mac. Die Gespraechsliste auf dem iPhone anschliessend
+aktualisieren. [Vollstaendige Einrichtung und Dateierhalt](../../docs/CLIENT-VERBINDUNG.md).
+
+Der macOS-Build installiert die mobilen Apps nicht automatisch. Dafuer sind
+die aktualisierten iPhone-/Watch-Targets separat zu signieren und auf den
+Geraeten zu installieren. Vor einem Watch-Update vorhandene Aufnahmen sichern.
 
 Unterstuetzte Owl-HTTP-Schnittstellen:
 

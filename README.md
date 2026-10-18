@@ -5,6 +5,7 @@
 Recap ist eine native Swift-App fuer macOS: Aufnahmen importieren oder aufnehmen, lokal transkribieren, Sprecher zuordnen und Gespraeche in einer lokalen Bibliothek verwalten. Ein eingebetteter HTTP-Empfaenger nimmt Aufnahmen von iPhone und Apple Watch an.
 
 - [macOS: Build und Bedienung](clients/macos/README.md)
+- [iPhone und Watch mit dem Mac verbinden](docs/CLIENT-VERBINDUNG.md)
 - [Umsetzungsstand](docs/MACOS-APP-UMSETZUNGSSTAND.md)
 - [Entwicklungsplan](docs/ENTWICKLUNGSPLAN.md)
 - [Rebranding und technische Kontinuitaet](docs/REBRANDING.md)

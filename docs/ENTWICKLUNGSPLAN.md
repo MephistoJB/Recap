@@ -244,3 +244,33 @@ den heutigen Agenten-/Memory-Bestand abgleichen.
 - [Hindsight Mental Models API](https://github.com/vectorize-io/hindsight/blob/main/hindsight-docs/docs/developer/api/mental-models.mdx)
 - [Bestehende Memory-Entscheidung](../../watch/docs/09-memory-decision-and-handoff.md)
 - [ADR-009 Hindsight](../../watch/docs/adr/ADR-009-hindsight-memory-backend.md)
+
+
+## Client-Verbindung nach Geraeteinstallation (2026-10-18)
+
+Der Benutzer hat den vollstaendigen Client-Umbau freigegeben. Implementiert sind
+Mac-Adresse/Token-Einstellungen, lokale Schluesselbundspeicherung, ein
+ausdruecklicher Konfigurationstransfer an die gekoppelte Watch und Uploads nur
+nach Aufnahmeende mit HTTP-Quittierung, Wiederholung und PCM-Wiederherstellung.
+Anleitung: [Client-Verbindung](CLIENT-VERBINDUNG.md).
+
+Die bereits auf den Geraeten installierte Version enthaelt diesen Umbau noch
+nicht. Vor Watch-Update werden die vorhandenen Aufnahmedateien gesichert.
+Aktuell ist das MacBook unter seiner bisherigen SSH-Adresse nicht erreichbar;
+auf dem macserver blockiert die Lizenz der inzwischen installierten Xcode-
+Version 27.1 die Entwicklerwerkzeuge. Simulator-Build und Regressionstests
+laufen unabhaengig davon im bestehenden GitHub-Pruefworkflow. Die physische
+Abnahme bis zum Mac-Transkript ist weiterhin offen.
+
+Gepruefter Quellcodestand: `e43399a`. Im GitHub-Lauf
+[39165531209](https://github.com/MephistoJB/Recap/actions/runs/39165531209)
+bestehen iPhone-/Watch-Simulator-Build und alle fuenf Client-Tests (Xcode 26.6).
+Die Tests pruefen HTTP 401/409/500 und Netzausfall, Keychain-Speicherung mit
+Wiederlesen, Wiederholung eines fehlgeschlagenen Verarbeitungsauftrags ohne
+Chunk-Neuversand, numerische Reihenfolge, Upload erst nach Aufnahmeende,
+PCM-Wiederherstellung und Adressvalidierung. Der erste unsignierte Testlauf
+hatte beim Keychain-Zugriff versagt; der korrigierte Lauf verwendet lokale
+Simulator-Signierung ohne private Entwicklerschluessel auf GitHub.
+Auch die acht vorhandenen Mac-Tests bestehen. Die neue Client-Version ist
+noch nicht auf den echten Geraeten installiert; die vorhandene Watch-Aufnahme
+wurde weder gesichert noch veraendert und ist noch nicht geprueft.
